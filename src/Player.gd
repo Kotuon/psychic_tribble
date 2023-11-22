@@ -22,6 +22,9 @@ var is_dashing = false
 # Attack
 var attack_damage = 10
 @export var is_attacking = false
+var attack_number = 0
+var is_combo = false
+@onready var attack_hitbox = $Attack_Hitbox
 
 var can_take_damage = true
 
@@ -47,15 +50,28 @@ func _input(event: InputEvent):
         start_dash()
     
     if event.is_action_pressed("attack"):
-        can_walk = false
-        is_attacking = true
+        if is_attacking && attack_number == 0:
+            is_combo = true
+        else:
+            can_walk = false
+            is_attacking = true
 
-        var animation_direction = get_animation_direction(velocity)
-        animation_player.play(animation_direction + "_slash_first")
+            animation_player.play(get_animation_direction(velocity) + "_slash_first")
+
+func start_can_combo():
+    #can_combo = true
+    pass
 
 func end_attack():
-    is_attacking = false
-    can_walk = true
+    if attack_number == 0 && is_combo:
+        animation_player.play(get_animation_direction(velocity) + "_slash_second")
+        attack_number += 1
+    else:
+        is_attacking = false
+        can_walk = true
+        attack_number = 0
+
+    is_combo = false
 
 func update_current_walk_speed(delta, direction : Vector2):
     if direction.length_squared() > 0.0:
@@ -71,34 +87,52 @@ func update_current_walk_speed(delta, direction : Vector2):
 
 func get_animation_direction(direction : Vector2) -> StringName:
     var animation_direction = "front"
+    attack_hitbox.position = Vector2(0.0, 30.0)
+    attack_hitbox.rotation = 0
 
     if direction.y > 0.0:
         if direction.x == 0.0:
             animation_direction = "front"
+            attack_hitbox.position = Vector2(0.0, 30.0)
+            attack_hitbox.rotation = 0
         else:
             if direction.x > 0.0:
                 sprite.flip_h = false
                 animation_direction = "front_side"
+                attack_hitbox.position = Vector2(21.0, 21.0)
+                attack_hitbox.rotation = -PI/4.0
             elif direction.x < 0.0:
                 sprite.flip_h = true
                 animation_direction = "front_side"
+                attack_hitbox.position = Vector2(-21.0, 21.0)
+                attack_hitbox.rotation = PI/4.0
     elif direction.y < 0.0:
         if direction.x == 0.0:
             animation_direction = "back"
+            attack_hitbox.position = Vector2(0.0, -30.0)
+            attack_hitbox.rotation = 0
         else:
             if direction.x > 0.0:
                 sprite.flip_h = false
                 animation_direction = "back_side"
+                attack_hitbox.position = Vector2(21.0, -21.0)
+                attack_hitbox.rotation = PI/4.0
             elif direction.x < 0.0:
                 sprite.flip_h = true
                 animation_direction = "back_side"
+                attack_hitbox.position = Vector2(-21.0, -21.0)
+                attack_hitbox.rotation = -PI/4.0
     else:
         if direction.x > 0.0:
             sprite.flip_h = false
             animation_direction = "side"
+            attack_hitbox.position = Vector2(30.0, 0.0)
+            attack_hitbox.rotation = PI/2.0
         elif direction.x < 0.0:
             sprite.flip_h = true
             animation_direction = "side"
+            attack_hitbox.position = Vector2(-30.0, 0.0)
+            attack_hitbox.rotation = PI/2.0
 
     return animation_direction
 
@@ -124,11 +158,14 @@ func walk(delta):
     move_and_slide()
 
 func start_dash():
+    dash_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+    if dash_direction.length_squared() == 0.0:
+        return
+
     can_walk = false
     is_dashing = true
     can_take_damage = false
     time_since_dash_started = 0.0
-    dash_direction = (get_viewport().get_mouse_position() - position).normalized()
 
     animation_player.play(get_animation_direction(dash_direction) + "_dash")
 
