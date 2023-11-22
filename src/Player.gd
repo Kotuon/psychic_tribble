@@ -21,7 +21,7 @@ var is_dashing = false
 
 # Attack
 var attack_damage = 10
-var is_attacking = false
+@export var is_attacking = false
 
 var can_take_damage = true
 
@@ -52,6 +52,10 @@ func _input(event: InputEvent):
 
         var animation_direction = get_animation_direction(velocity)
         animation_player.play(animation_direction + "_slash_first")
+
+func end_attack():
+    is_attacking = false
+    can_walk = true
 
 func update_current_walk_speed(delta, direction : Vector2):
     if direction.length_squared() > 0.0:
