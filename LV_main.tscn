@@ -1,8 +1,126 @@
-[gd_scene load_steps=2 format=3 uid="uid://jgk5arowrp2t"]
+[gd_scene load_steps=7 format=3 uid="uid://jgk5arowrp2t"]
 
 [ext_resource type="PackedScene" uid="uid://b1klx5r40rdl5" path="res://player/Player.tscn" id="1_kx2pb"]
+[ext_resource type="PackedScene" uid="uid://drd5gnki01kge" path="res://objects/wall.tscn" id="2_42i5r"]
+[ext_resource type="PackedScene" uid="uid://ww0cw6ukpvsj" path="res://objects/not_ground.tscn" id="3_n57gs"]
+[ext_resource type="PackedScene" uid="uid://ct42ti53jtdon" path="res://objects/checkpoint.tscn" id="4_0tuwm"]
+[ext_resource type="PackedScene" uid="uid://jix85le31wwy" path="res://objects/moving_trap.tscn" id="5_nuojl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_v36pa"]
+font_size = 66
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_kx2pb")]
 position = Vector2(960, 810)
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="wall" parent="Walls" instance=ExtResource("2_42i5r")]
+position = Vector2(960, 1080)
+scale = Vector2(44, 3)
+
+[node name="wall2" parent="Walls" instance=ExtResource("2_42i5r")]
+position = Vector2(550, 830)
+scale = Vector2(3, 22)
+
+[node name="wall3" parent="Walls" instance=ExtResource("2_42i5r")]
+position = Vector2(1370, 830)
+scale = Vector2(3, 22)
+
+[node name="wall4" parent="Walls" instance=ExtResource("2_42i5r")]
+position = Vector2(675, 498)
+rotation = 0.785398
+scale = Vector2(3, 18.86)
+
+[node name="wall5" parent="Walls" instance=ExtResource("2_42i5r")]
+position = Vector2(1245, 498)
+rotation = -0.785398
+scale = Vector2(3, 18.86)
+
+[node name="wall6" parent="Walls" instance=ExtResource("2_42i5r")]
+position = Vector2(799.5, -54)
+scale = Vector2(3, 44)
+
+[node name="wall7" parent="Walls" instance=ExtResource("2_42i5r")]
+position = Vector2(1120.5, -54)
+scale = Vector2(3, 44)
+
+[node name="wall8" parent="Walls" instance=ExtResource("2_42i5r")]
+position = Vector2(599.5, -714)
+scale = Vector2(3, 22)
+
+[node name="wall9" parent="Walls" instance=ExtResource("2_42i5r")]
+position = Vector2(1320.5, -714)
+scale = Vector2(3, 22)
+
+[node name="wall10" parent="Walls" instance=ExtResource("2_42i5r")]
+position = Vector2(1250, -464)
+scale = Vector2(10.05, 3)
+
+[node name="wall11" parent="Walls" instance=ExtResource("2_42i5r")]
+position = Vector2(670, -464)
+scale = Vector2(10.05, 3)
+
+[node name="wall12" parent="Walls" instance=ExtResource("2_42i5r")]
+position = Vector2(1250, -964)
+scale = Vector2(10.05, 3)
+
+[node name="wall13" parent="Walls" instance=ExtResource("2_42i5r")]
+position = Vector2(670, -964)
+scale = Vector2(10.05, 3)
+
+[node name="wall14" parent="Walls" instance=ExtResource("2_42i5r")]
+position = Vector2(799.5, -1154)
+scale = Vector2(3, 22)
+
+[node name="wall15" parent="Walls" instance=ExtResource("2_42i5r")]
+position = Vector2(1120.5, -1154)
+scale = Vector2(3, 22)
+
+[node name="wall16" parent="Walls" instance=ExtResource("2_42i5r")]
+position = Vector2(799.5, -2034)
+scale = Vector2(3, 60)
+
+[node name="wall17" parent="Walls" instance=ExtResource("2_42i5r")]
+position = Vector2(1120.5, -2034)
+scale = Vector2(3, 60)
+
+[node name="Checkpoints" type="Node" parent="."]
+
+[node name="checkpoint" parent="Checkpoints" instance=ExtResource("4_0tuwm")]
+position = Vector2(960, -714)
+
+[node name="Hazards" type="Node" parent="."]
+
+[node name="not_ground" parent="Hazards" instance=ExtResource("3_n57gs")]
+position = Vector2(960, -1404)
+scale = Vector2(19.05, 3)
+
+[node name="moving_trap" parent="Hazards" instance=ExtResource("5_nuojl")]
+position = Vector2(809, -1995)
+distance_to_move = 151.0
+time_to_move = 1.2
+
+[node name="moving_trap2" parent="Hazards" instance=ExtResource("5_nuojl")]
+position = Vector2(809, -2155)
+distance_to_move = 151.0
+time_to_move = 1.2
+start_delay = 0.1
+
+[node name="Dash_Tutorial" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 871.0
+offset_top = -1451.0
+offset_right = 1049.0
+offset_bottom = -1357.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(89, 47)
+text = "DASH"
+label_settings = SubResource("LabelSettings_v36pa")
+vertical_alignment = 1

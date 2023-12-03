@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://jix85le31wwy"]
+
+[ext_resource type="Script" path="res://src/moving_trap.gd" id="1_esue4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_16yg6"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_fsl6l"]
+
+[sub_resource type="Gradient" id="Gradient_jmnaj"]
+colors = PackedColorArray(0.596078, 0.384314, 0.65098, 1, 0.596078, 0.384314, 0.65098, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_r82u1"]
+gradient = SubResource("Gradient_jmnaj")
+
+[node name="moving_trap" type="Node2D"]
+z_index = -1
+scale = Vector2(2, 4)
+script = ExtResource("1_esue4")
+distance_to_move = 200.0
+time_to_move = 1.0
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_16yg6")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Area2D"]
+scale = Vector2(20, 20)
+mesh = SubResource("QuadMesh_fsl6l")
+texture = SubResource("GradientTexture1D_r82u1")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

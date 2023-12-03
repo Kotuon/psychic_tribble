@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var max_walk_speed = 350
 @export var walk_acceleration = 600
 @export var brake_speed = 1250
-@export var turn_speed = 10000
+@export var turn_speed = 1000000
 
 var current_walk_speed = 0
 var can_walk = true
@@ -27,10 +27,13 @@ var is_combo = false
 @onready var attack_hitbox = $Attack_Hitbox
 
 var can_take_damage = true
+var in_hazard = false
 
 # Animations
 @onready var animation_player = $AnimationPlayer
 @onready var sprite = $Sprite2D
+
+var most_recent_checkpoint : Node2D
 
 func _draw():
     pass
@@ -50,6 +53,7 @@ func _input(event: InputEvent):
         start_dash()
     
     if event.is_action_pressed("attack"):
+        attack_hitbox.disabled = false
         if is_attacking && attack_number == 0:
             is_combo = true
         else:
@@ -72,6 +76,8 @@ func end_attack():
         attack_number = 0
 
     is_combo = false
+    current_walk_speed = 0
+    attack_hitbox.disabled = true
 
 func update_current_walk_speed(delta, direction : Vector2):
     if direction.length_squared() > 0.0:
@@ -184,3 +190,15 @@ func dash(delta):
         can_take_damage = true
         velocity = Vector2.ZERO
         current_walk_speed = 0.0
+
+        if in_hazard:
+            kill()
+
+func kill():
+    print("You have died.")
+    if most_recent_checkpoint:
+        print("Start at checkpoint.")
+        position = most_recent_checkpoint.position
+    else:
+        print("No checkpoint.")
+        get_tree().reload_current_scene()

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://drd5gnki01kge"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_16yg6"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_fsl6l"]
+
+[sub_resource type="Gradient" id="Gradient_jmnaj"]
+colors = PackedColorArray(0.196078, 0.196078, 0.196078, 1, 0.196078, 0.196078, 0.196078, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_r82u1"]
+gradient = SubResource("Gradient_jmnaj")
+
+[node name="wall" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_16yg6")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D"]
+scale = Vector2(20, 20)
+mesh = SubResource("QuadMesh_fsl6l")
+texture = SubResource("GradientTexture1D_r82u1")
