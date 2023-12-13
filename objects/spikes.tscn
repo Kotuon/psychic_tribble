@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://ww0cw6ukpvsj"]
 
-[ext_resource type="Script" path="res://src/not_ground.gd" id="1_gqm8f"]
+[ext_resource type="Script" path="res://src/spikes.gd" id="1_2w58h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_16yg6"]
 
@@ -12,9 +12,9 @@ colors = PackedColorArray(0.341176, 0.458824, 0.741176, 1, 0.341176, 0.458824, 0
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_r82u1"]
 gradient = SubResource("Gradient_jmnaj")
 
-[node name="not_ground" type="Node2D"]
+[node name="spikes" type="Node2D"]
 z_index = -1
-script = ExtResource("1_gqm8f")
+script = ExtResource("1_2w58h")
 
 [node name="Area2D" type="Area2D" parent="."]
 

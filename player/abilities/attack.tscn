@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bboby1p53hu7k"]
+
+[ext_resource type="PackedScene" uid="uid://0r5mm4yt5bnb" path="res://player/abilities/ability.tscn" id="1_kq6on"]
+[ext_resource type="Script" path="res://player/abilities/attack.gd" id="2_xmfwb"]
+
+[node name="ability" instance=ExtResource("1_kq6on")]
+script = ExtResource("2_xmfwb")
+attack_damage = 10

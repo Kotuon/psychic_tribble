@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://b1klx5r40rdl5"]
+[gd_scene load_steps=49 format=3 uid="uid://b1klx5r40rdl5"]
 
 [ext_resource type="Script" path="res://src/player.gd" id="1_ff67g"]
 [ext_resource type="Texture2D" uid="uid://xmu8w7d00kmw" path="res://assets/art/Back DashnRoll.png" id="2_7ydao"]
@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://dthdalhxortnh" path="res://assets/art/FrontSide Consecutive Slash.png" id="12_2n3vw"]
 [ext_resource type="Texture2D" uid="uid://46clpkms3o3c" path="res://assets/art/Side ConsecutiveSlash.png" id="15_pck2t"]
 [ext_resource type="Texture2D" uid="uid://bw1yyunyfon2f" path="res://assets/art/Side DashnRoll.png" id="16_561kj"]
+[ext_resource type="PackedScene" uid="uid://8iwfrqw1cfik" path="res://player/abilities/dash.tscn" id="17_2vuqu"]
+[ext_resource type="PackedScene" uid="uid://bboby1p53hu7k" path="res://player/abilities/attack.tscn" id="18_panjm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6ud2j"]
 radius = 15.0
@@ -1714,3 +1716,8 @@ disabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
+
+[node name="Dash" parent="." instance=ExtResource("17_2vuqu")]
+cooldown = 1.0
+
+[node name="Attack" parent="." instance=ExtResource("18_panjm")]

@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 @export var size : float
 
@@ -11,13 +12,9 @@ extends CharacterBody2D
 var current_walk_speed = 0
 var can_walk = true
 
-#Dash
-@export var time_to_dash = 0.2
-@export var dash_distance = 200
-
-var dash_direction : Vector2
-var time_since_dash_started = 0.0
-var is_dashing = false
+#Abilities
+@onready var dash = $Dash
+@onready var attack = $Attack
 
 # Attack
 var attack_damage = 10
@@ -46,21 +43,22 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
     walk(delta)
-    dash(delta)
 
 func _input(event: InputEvent):
     if event.is_action_pressed("dash"):
-        start_dash()
+        dash.start()
+        #start_dash()
     
     if event.is_action_pressed("attack"):
-        attack_hitbox.disabled = false
-        if is_attacking && attack_number == 0:
-            is_combo = true
-        else:
-            can_walk = false
-            is_attacking = true
-
-            animation_player.play(get_animation_direction(velocity) + "_slash_first")
+        attack.start()
+#        attack_hitbox.disabled = false
+#        if is_attacking && attack_number == 0:
+#            is_combo = true
+#        else:
+#            can_walk = false
+#            is_attacking = true
+#
+#            animation_player.play(get_animation_direction(velocity) + "_slash_first")
 
 func start_can_combo():
     #can_combo = true
@@ -162,37 +160,6 @@ func walk(delta):
     else:
         animation_player.play(animation_direction + "_run")
     move_and_slide()
-
-func start_dash():
-    dash_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-    if dash_direction.length_squared() == 0.0:
-        return
-
-    can_walk = false
-    is_dashing = true
-    can_take_damage = false
-    time_since_dash_started = 0.0
-
-    animation_player.play(get_animation_direction(dash_direction) + "_dash")
-
-    velocity = dash_direction * (dash_distance / time_to_dash)
-
-func dash(delta):
-    if !is_dashing:
-        return
-
-    time_since_dash_started += delta
-    move_and_slide()
-
-    if time_since_dash_started > time_to_dash:
-        can_walk = true
-        is_dashing = false
-        can_take_damage = true
-        velocity = Vector2.ZERO
-        current_walk_speed = 0.0
-
-        if in_hazard:
-            kill()
 
 func kill():
     print("You have died.")

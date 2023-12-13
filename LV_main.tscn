@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b1klx5r40rdl5" path="res://player/Player.tscn" id="1_kx2pb"]
 [ext_resource type="PackedScene" uid="uid://drd5gnki01kge" path="res://objects/wall.tscn" id="2_42i5r"]
-[ext_resource type="PackedScene" uid="uid://ww0cw6ukpvsj" path="res://objects/not_ground.tscn" id="3_n57gs"]
+[ext_resource type="PackedScene" uid="uid://ww0cw6ukpvsj" path="res://objects/spikes.tscn" id="3_n57gs"]
 [ext_resource type="PackedScene" uid="uid://ct42ti53jtdon" path="res://objects/checkpoint.tscn" id="4_0tuwm"]
 [ext_resource type="PackedScene" uid="uid://jix85le31wwy" path="res://objects/moving_trap.tscn" id="5_nuojl"]
 
