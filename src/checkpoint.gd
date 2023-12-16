@@ -1,5 +1,6 @@
 extends Node2D
 
+@onready var audioplayer = $Checkpoint_AudioPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,4 +17,5 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
         print("Hit checkpoint.")
         if body.most_recent_checkpoint != self:
             $Effect.restart()
+            audioplayer.play()
         body.most_recent_checkpoint = self

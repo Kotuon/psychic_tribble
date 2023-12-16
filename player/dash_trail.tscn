@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bejl1pvy6pkkr"]
+
+[ext_resource type="Script" path="res://src/dash_trail.gd" id="1_gkqa0"]
+
+[node name="Dash_Trail" type="Sprite2D"]
+scale = Vector2(3, 3)
+script = ExtResource("1_gkqa0")

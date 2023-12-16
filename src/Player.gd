@@ -9,20 +9,19 @@ class_name Player
 @export var brake_speed = 1250
 @export var turn_speed = 1000000
 
+var last_non_zero_input : Vector2
+
 var current_walk_speed = 0
 var can_walk = true
 
-#Abilities
+# Abilities
 @onready var dash = $Dash
 @onready var attack = $Attack
 
 # Attack
-var attack_damage = 10
-@export var is_attacking = false
-var attack_number = 0
-var is_combo = false
 @onready var attack_hitbox = $Attack_Hitbox
 
+# Taking damage
 var can_take_damage = true
 var in_hazard = false
 
@@ -31,6 +30,15 @@ var in_hazard = false
 @onready var sprite = $Sprite2D
 
 var most_recent_checkpoint : Node2D
+
+var rng = RandomNumberGenerator.new()
+
+# Audio
+@onready var footstep_audioplayer = $Footstep_AudioPlayer
+@onready var hit_audioplayer = $Hit_AudioPlayer
+
+@export var footstep_sounds : Array[AudioStream]
+@export var hit_sounds : Array[AudioStream]
 
 func _draw():
     pass
@@ -47,35 +55,9 @@ func _process(delta):
 func _input(event: InputEvent):
     if event.is_action_pressed("dash"):
         dash.start()
-        #start_dash()
-    
+
     if event.is_action_pressed("attack"):
         attack.start()
-#        attack_hitbox.disabled = false
-#        if is_attacking && attack_number == 0:
-#            is_combo = true
-#        else:
-#            can_walk = false
-#            is_attacking = true
-#
-#            animation_player.play(get_animation_direction(velocity) + "_slash_first")
-
-func start_can_combo():
-    #can_combo = true
-    pass
-
-func end_attack():
-    if attack_number == 0 && is_combo:
-        animation_player.play(get_animation_direction(velocity) + "_slash_second")
-        attack_number += 1
-    else:
-        is_attacking = false
-        can_walk = true
-        attack_number = 0
-
-    is_combo = false
-    current_walk_speed = 0
-    attack_hitbox.disabled = true
 
 func update_current_walk_speed(delta, direction : Vector2):
     if direction.length_squared() > 0.0:
@@ -145,24 +127,49 @@ func walk(delta):
         return
 
     var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+    if direction.length_squared() > 0.0:
+        last_non_zero_input = direction
 
     update_current_walk_speed(delta, direction)
     if velocity.normalized() == (direction.normalized() * -1.0):
         direction += (direction.orthogonal() * turn_speed)
+
     velocity = (velocity + (direction * turn_speed)).normalized() * current_walk_speed
 
     var animation_direction = get_animation_direction(velocity)
 
     if current_walk_speed == 0.0:
-        animation_player.play("front_idle")
+        animation_player.play(get_animation_direction(last_non_zero_input) + "_idle")
     elif current_walk_speed < 200:
         animation_player.play(animation_direction + "_walk")
+        play_footstep_sound()
     else:
         animation_player.play(animation_direction + "_run")
+        play_footstep_sound()
     move_and_slide()
+
+func play_footstep_sound():
+    if footstep_audioplayer.is_playing(): 
+        return
+    
+    var random_index = rng.randi_range(0,footstep_sounds.size() - 1)
+    footstep_audioplayer.stream = footstep_sounds[random_index]
+    footstep_audioplayer.play()
+
+func play_hit_sound():
+    if hit_audioplayer.is_playing(): 
+        return
+    
+    var random_index = rng.randi_range(0,hit_sounds.size() - 1)
+    hit_audioplayer.stream = hit_sounds[random_index]
+    hit_audioplayer.play()
 
 func kill():
     print("You have died.")
+
+    current_walk_speed = 0.0
+    play_hit_sound()
+
     if most_recent_checkpoint:
         print("Start at checkpoint.")
         position = most_recent_checkpoint.position

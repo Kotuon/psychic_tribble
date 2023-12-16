@@ -6,6 +6,9 @@ extends Ability
 var dash_direction : Vector2
 var time_since_dash_started = 0.0
 
+@export var time_between_trail = 0.01
+var trail_counter = 0.0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     super._ready()
@@ -31,17 +34,25 @@ func start() -> bool:
 
     parent.animation_player.play(parent.get_animation_direction(dash_direction) + "_dash")
     parent.velocity = dash_direction * (dash_distance / time_to_dash)
+    play_sound()
+    trail_counter = time_between_trail
 
     return true
 
 func update(delta: float) -> void:
     super.update(delta)
     time_since_dash_started += delta
+    trail_counter -= delta
+    
+    if trail_counter <= 0.0:
+        spawn_trail()
+        trail_counter = time_between_trail
+
     parent.move_and_slide()
 
     if time_since_dash_started > time_to_dash:
         end()
-    
+
 func end() -> void:
     super.end()
 
@@ -53,3 +64,19 @@ func end() -> void:
 
     if parent.in_hazard:
         parent.kill()
+
+func play_sound():
+    if ability_audioplayer.is_playing():
+        ability_audioplayer.stop()
+
+    ability_audioplayer.stream = sound_effects[0]
+    ability_audioplayer.play()
+
+func spawn_trail():
+    var this_trail = preload("res://player/dash_trail.tscn").instantiate()
+    parent.get_parent().add_child(this_trail)
+    this_trail.texture = parent.sprite.get_texture()
+    this_trail.hframes = parent.sprite.hframes
+    this_trail.vframes = parent.sprite.vframes
+    this_trail.frame = parent.sprite.frame
+    this_trail.position = parent.position

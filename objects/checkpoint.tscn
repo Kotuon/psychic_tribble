@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://ct42ti53jtdon"]
+[gd_scene load_steps=8 format=3 uid="uid://ct42ti53jtdon"]
 
 [ext_resource type="Script" path="res://src/checkpoint.gd" id="1_gmy0m"]
+[ext_resource type="AudioStream" uid="uid://r8pnmokye0e2" path="res://assets/audio/items/Fantasy_Game_Item_Collect_Magic_G.wav" id="2_l3jao"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_16yg6"]
 
@@ -44,5 +45,11 @@ orbit_velocity_max = 2.0
 damping_max = 100.0
 scale_amount_max = 6.0
 color_ramp = SubResource("Gradient_8nm1c")
+
+[node name="Checkpoint_AudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_l3jao")
+volume_db = -10.0
+pitch_scale = 0.7
+bus = &"SFX"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

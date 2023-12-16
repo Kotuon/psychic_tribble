@@ -25,11 +25,12 @@ func start() -> bool:
     attack_hitbox.disabled = false
     if is_running && attack_number == 0:
         is_combo = true
-        print("IS_COMBO")
-    else:
+    elif !is_running && attack_number == 0:
         parent.can_walk = false
         is_running = true
-        parent.animation_player.play(parent.get_animation_direction(parent.velocity) + "_slash_first")
+        parent.animation_player.play(parent.get_animation_direction(parent.last_non_zero_input) + "_slash_first")
+        play_sound()
+
 
     return true
 
@@ -38,15 +39,22 @@ func update(delta: float) -> void:
 
 func end() -> void:
     if attack_number == 0 && is_combo:
-        parent.animation_player.play(parent.get_animation_direction(parent.velocity) + "_slash_second")
+        parent.animation_player.play(parent.get_animation_direction(parent.last_non_zero_input) + "_slash_second")
+        play_sound()
         attack_number += 1
-        print("COMBO")
     else:
         super.end()
         is_running = false
         parent.can_walk = true
         attack_number = 0
+        attack_hitbox.disabled = true
+        parent.current_walk_speed = 0
+        is_combo = false
 
-    is_combo = false
-    parent.current_walk_speed = 0
-    attack_hitbox.disabled = true
+func play_sound():
+    if ability_audioplayer.is_playing():
+        ability_audioplayer.stop()
+
+    var random_index = parent.rng.randi_range(0,sound_effects.size() - 1)
+    ability_audioplayer.stream = sound_effects[random_index]
+    ability_audioplayer.play(0.3)
