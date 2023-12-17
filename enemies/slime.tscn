@@ -199,6 +199,23 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(0, -11)]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"freeze_movement"
+}, {
+"args": [],
+"method": &"unfreeze_movement"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_xnb15"]
 resource_name = "front_idle"
@@ -331,6 +348,26 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(0, -13)]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"freeze_movement"
+}, {
+"args": [],
+"method": &"unfreeze_movement"
+}, {
+"args": [],
+"method": &"freeze_movement"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_r50v7"]
 resource_name = "side_idle"
@@ -462,6 +499,26 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, -11)]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"freeze_movement"
+}, {
+"args": [],
+"method": &"unfreeze_movement"
+}, {
+"args": [],
+"method": &"freeze_movement"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mt2kb"]

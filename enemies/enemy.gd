@@ -109,14 +109,15 @@ func update_current_walk_speed(delta, direction : Vector2):
             current_walk_speed = 0.0
 
 func walk(delta):
-    if !can_walk:
-        return
-
     var direction = (player.position - position).normalized()
     if direction.length_squared() > 0.0:
         last_non_zero_input = direction
 
     update_current_walk_speed(delta, direction)
+
+    if !can_walk:
+        return
+
     if velocity.normalized() == (direction.normalized() * -1.0):
         direction += (direction.orthogonal() * turn_speed)
 
