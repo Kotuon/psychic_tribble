@@ -5,7 +5,7 @@
 
 [node name="attack" instance=ExtResource("1_kq6on")]
 script = ExtResource("2_xmfwb")
-attack_damage = 10
+attack_damage = 1
 
 [node name="Ability_AudioPlayer" parent="." index="0"]
 pitch_scale = 0.9

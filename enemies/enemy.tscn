@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cku42w0rkx1wt"]
+
+[ext_resource type="Script" path="res://enemies/slime.gd" id="1_l452f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_21rks"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_asqt7"]
+size = Vector2(45.5, 10.2)
+
+[node name="enemy" type="CharacterBody2D"]
+script = ExtResource("1_l452f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Enemy_Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_21rks")
+
+[node name="Attack_Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_asqt7")
+disabled = true

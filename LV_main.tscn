@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://jgk5arowrp2t"]
+[gd_scene load_steps=9 format=3 uid="uid://jgk5arowrp2t"]
 
 [ext_resource type="PackedScene" uid="uid://b1klx5r40rdl5" path="res://player/Player.tscn" id="1_kx2pb"]
 [ext_resource type="PackedScene" uid="uid://drd5gnki01kge" path="res://objects/wall.tscn" id="2_42i5r"]
-[ext_resource type="PackedScene" uid="uid://ww0cw6ukpvsj" path="res://objects/spikes.tscn" id="3_n57gs"]
+[ext_resource type="PackedScene" uid="uid://ww0cw6ukpvsj" path="res://objects/traps/spikes.tscn" id="3_n57gs"]
 [ext_resource type="PackedScene" uid="uid://ct42ti53jtdon" path="res://objects/checkpoint.tscn" id="4_0tuwm"]
-[ext_resource type="PackedScene" uid="uid://jix85le31wwy" path="res://objects/moving_trap.tscn" id="5_nuojl"]
+[ext_resource type="PackedScene" uid="uid://jix85le31wwy" path="res://objects/traps/moving_trap.tscn" id="5_nuojl"]
 [ext_resource type="AudioStream" uid="uid://dkp42xwrgacp6" path="res://assets/audio/ambient/Fantasy_World_Loop_Ambience_Crystal_Maze_Full_Swirling_Ancient_Movement_Motion_LFO_Modulation_Cm.wav" id="6_5h4ko"]
+[ext_resource type="PackedScene" uid="uid://brdm0dna3iywg" path="res://enemies/slime.tscn" id="7_j82dl"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_v36pa"]
 font_size = 66
@@ -130,3 +131,6 @@ vertical_alignment = 1
 stream = ExtResource("6_5h4ko")
 autoplay = true
 bus = &"Ambient"
+
+[node name="slime" parent="." instance=ExtResource("7_j82dl")]
+position = Vector2(945, 581)

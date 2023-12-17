@@ -1,33 +1,33 @@
 [gd_scene load_steps=67 format=3 uid="uid://b1klx5r40rdl5"]
 
-[ext_resource type="Script" path="res://src/player.gd" id="1_ff67g"]
-[ext_resource type="Texture2D" uid="uid://xmu8w7d00kmw" path="res://assets/art/Back DashnRoll.png" id="2_7ydao"]
-[ext_resource type="Texture2D" uid="uid://2xdxn686thjw" path="res://assets/art/Back Movement.png" id="2_fw5oo"]
+[ext_resource type="Script" path="res://player/player.gd" id="1_i7h6x"]
+[ext_resource type="Texture2D" uid="uid://xmu8w7d00kmw" path="res://assets/art/Red_Sprite/Back DashnRoll.png" id="2_7ydao"]
+[ext_resource type="Texture2D" uid="uid://2xdxn686thjw" path="res://assets/art/Red_Sprite/Back Movement.png" id="2_fw5oo"]
 [ext_resource type="AudioStream" uid="uid://dao2ksoscougm" path="res://assets/audio/footsteps/Fantasy_Game_Footstep_Stone_Light_A.wav" id="2_jy20e"]
-[ext_resource type="Texture2D" uid="uid://deqsogx5h1wol" path="res://assets/art/BackSIde Movement.png" id="3_b6yvc"]
-[ext_resource type="Texture2D" uid="uid://c5nxw3mbhht0k" path="res://assets/art/Front Movement.png" id="3_cix6v"]
+[ext_resource type="Texture2D" uid="uid://deqsogx5h1wol" path="res://assets/art/Red_Sprite/BackSIde Movement.png" id="3_b6yvc"]
+[ext_resource type="Texture2D" uid="uid://c5nxw3mbhht0k" path="res://assets/art/Red_Sprite/Front Movement.png" id="3_cix6v"]
 [ext_resource type="AudioStream" uid="uid://cosbmpcbdtih7" path="res://assets/audio/footsteps/Fantasy_Game_Footstep_Stone_Light_B.wav" id="3_ghg36"]
 [ext_resource type="AudioStream" uid="uid://bbc3jll7nvjfw" path="res://assets/audio/footsteps/Fantasy_Game_Footstep_Stone_Light_C.wav" id="4_6iq4f"]
-[ext_resource type="Texture2D" uid="uid://dnnju7svub8mo" path="res://assets/art/BackSide DashnRoll.png" id="4_31qkb"]
-[ext_resource type="Texture2D" uid="uid://8sjunphuxq8f" path="res://assets/art/Front DashnRoll.png" id="4_d32xh"]
+[ext_resource type="Texture2D" uid="uid://dnnju7svub8mo" path="res://assets/art/Red_Sprite/BackSide DashnRoll.png" id="4_31qkb"]
+[ext_resource type="Texture2D" uid="uid://8sjunphuxq8f" path="res://assets/art/Red_Sprite/Front DashnRoll.png" id="4_d32xh"]
 [ext_resource type="AudioStream" uid="uid://ch3vrbaqwf4qs" path="res://assets/audio/footsteps/Fantasy_Game_Footstep_Stone_Light_D.wav" id="5_jdfwg"]
-[ext_resource type="Texture2D" uid="uid://b7uq6u45j4mnu" path="res://assets/art/FrontSide Movement.png" id="5_t6n6e"]
-[ext_resource type="Texture2D" uid="uid://dxof852yd2cmw" path="res://assets/art/BackSIde COnesecutiveSlash.png" id="6_gra1p"]
+[ext_resource type="Texture2D" uid="uid://b7uq6u45j4mnu" path="res://assets/art/Red_Sprite/FrontSide Movement.png" id="5_t6n6e"]
+[ext_resource type="Texture2D" uid="uid://dxof852yd2cmw" path="res://assets/art/Red_Sprite/BackSIde COnesecutiveSlash.png" id="6_gra1p"]
 [ext_resource type="AudioStream" uid="uid://ppnyhqoudai7" path="res://assets/audio/footsteps/Fantasy_Game_Footstep_Stone_Light_E.wav" id="6_t45me"]
-[ext_resource type="Texture2D" uid="uid://dpbgkvfc6ghoc" path="res://assets/art/Back ConsecutiveSlash.png" id="7_68oht"]
-[ext_resource type="Texture2D" uid="uid://b7dt7d42431gw" path="res://assets/art/Side Movement.png" id="7_ey8nx"]
+[ext_resource type="Texture2D" uid="uid://dpbgkvfc6ghoc" path="res://assets/art/Red_Sprite/Back ConsecutiveSlash.png" id="7_68oht"]
+[ext_resource type="Texture2D" uid="uid://b7dt7d42431gw" path="res://assets/art/Red_Sprite/Side Movement.png" id="7_ey8nx"]
 [ext_resource type="AudioStream" uid="uid://3ob21jtkaj3y" path="res://assets/audio/footsteps/Fantasy_Game_Footstep_Stone_Light_F.wav" id="7_ob61q"]
-[ext_resource type="Texture2D" uid="uid://dsulxkjbsy6e8" path="res://assets/art/FrontSide DashnRoll.png" id="8_eg5r0"]
+[ext_resource type="Texture2D" uid="uid://dsulxkjbsy6e8" path="res://assets/art/Red_Sprite/FrontSide DashnRoll.png" id="8_eg5r0"]
 [ext_resource type="AudioStream" uid="uid://dm27foos5pvwx" path="res://assets/audio/footsteps/Fantasy_Game_Footstep_Stone_Light_G.wav" id="8_trirk"]
 [ext_resource type="AudioStream" uid="uid://bn22pviqaerbr" path="res://assets/audio/footsteps/Fantasy_Game_Footstep_Stone_Light_H.wav" id="9_4q7b0"]
-[ext_resource type="Texture2D" uid="uid://tgxw5lt3esab" path="res://assets/art/Front ConsecutiveSlash.png" id="10_34owq"]
+[ext_resource type="Texture2D" uid="uid://tgxw5lt3esab" path="res://assets/art/Red_Sprite/Front ConsecutiveSlash.png" id="10_34owq"]
 [ext_resource type="AudioStream" uid="uid://ce3f4rk32x4bi" path="res://assets/audio/footsteps/Fantasy_Game_Footstep_Stone_Light_I.wav" id="10_rnnww"]
 [ext_resource type="AudioStream" uid="uid://vs8ssnu2hgu4" path="res://assets/audio/footsteps/Fantasy_Game_Footstep_Stone_Light_J.wav" id="11_5wtk2"]
 [ext_resource type="AudioStream" uid="uid://c1k8fjcq6aa83" path="res://assets/audio/attack/Fantasy_Game_Attack_Cloth_Armor_Hit_A.wav" id="12_1c3oy"]
-[ext_resource type="Texture2D" uid="uid://dthdalhxortnh" path="res://assets/art/FrontSide Consecutive Slash.png" id="12_2n3vw"]
+[ext_resource type="Texture2D" uid="uid://dthdalhxortnh" path="res://assets/art/Red_Sprite/FrontSide Consecutive Slash.png" id="12_2n3vw"]
 [ext_resource type="AudioStream" uid="uid://bu1016c8u40wj" path="res://assets/audio/attack/Fantasy_Game_Attack_Cloth_Armor_Hit_B.wav" id="13_kxyi2"]
-[ext_resource type="Texture2D" uid="uid://46clpkms3o3c" path="res://assets/art/Side ConsecutiveSlash.png" id="15_pck2t"]
-[ext_resource type="Texture2D" uid="uid://bw1yyunyfon2f" path="res://assets/art/Side DashnRoll.png" id="16_561kj"]
+[ext_resource type="Texture2D" uid="uid://46clpkms3o3c" path="res://assets/art/Red_Sprite/Side ConsecutiveSlash.png" id="15_pck2t"]
+[ext_resource type="Texture2D" uid="uid://bw1yyunyfon2f" path="res://assets/art/Red_Sprite/Side DashnRoll.png" id="16_561kj"]
 [ext_resource type="PackedScene" uid="uid://8iwfrqw1cfik" path="res://player/abilities/dash.tscn" id="17_2vuqu"]
 [ext_resource type="PackedScene" uid="uid://bboby1p53hu7k" path="res://player/abilities/attack.tscn" id="18_panjm"]
 [ext_resource type="AudioStream" uid="uid://v2gjo7fbt75r" path="res://assets/audio/abilities/Fantasy_Game_Item_Collect_Magic_A.wav" id="28_4o63s"]
@@ -1906,7 +1906,7 @@ size = Vector2(100, 60)
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 floor_stop_on_slope = false
-script = ExtResource("1_ff67g")
+script = ExtResource("1_i7h6x")
 size = 50.0
 footstep_sounds = Array[AudioStream]([ExtResource("2_jy20e"), ExtResource("3_ghg36"), ExtResource("4_6iq4f"), ExtResource("5_jdfwg"), ExtResource("6_t45me"), ExtResource("7_ob61q"), ExtResource("8_trirk"), ExtResource("9_4q7b0"), ExtResource("10_rnnww"), ExtResource("11_5wtk2")])
 hit_sounds = Array[AudioStream]([ExtResource("12_1c3oy"), ExtResource("13_kxyi2")])
@@ -1927,11 +1927,6 @@ hframes = 9
 vframes = 3
 frame = 18
 
-[node name="Attack_Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(0, 30)
-shape = SubResource("RectangleShape2D_ri11x")
-disabled = true
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 position_smoothing_speed = 4.0
@@ -1945,6 +1940,13 @@ sound_effects = Array[AudioStream]([ExtResource("28_4o63s")])
 cooldown = 0.05
 sound_effects = Array[AudioStream]([ExtResource("29_hpvr5")])
 
+[node name="Attack_Area" type="Area2D" parent="Attack"]
+
+[node name="Attack_Hitbox" type="CollisionShape2D" parent="Attack/Attack_Area"]
+position = Vector2(0, 30)
+shape = SubResource("RectangleShape2D_ri11x")
+disabled = true
+
 [node name="Footstep_AudioPlayer" type="AudioStreamPlayer2D" parent="."]
 volume_db = -10.826
 bus = &"SFX"
@@ -1952,3 +1954,5 @@ bus = &"SFX"
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
 
 [node name="Hit_AudioPlayer" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="body_entered" from="Attack/Attack_Area" to="Attack" method="_on_attack_area_body_entered"]

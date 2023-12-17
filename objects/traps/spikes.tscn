@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://ww0cw6ukpvsj"]
+
+[ext_resource type="Script" path="res://objects/traps/spikes.gd" id="1_2w58h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_16yg6"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_fsl6l"]
+
+[sub_resource type="Gradient" id="Gradient_jmnaj"]
+colors = PackedColorArray(0.341176, 0.458824, 0.741176, 1, 0.341176, 0.458824, 0.741176, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_r82u1"]
+gradient = SubResource("Gradient_jmnaj")
+
+[node name="spikes" type="Node2D"]
+z_index = -1
+script = ExtResource("1_2w58h")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_16yg6")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Area2D"]
+scale = Vector2(20, 20)
+mesh = SubResource("QuadMesh_fsl6l")
+texture = SubResource("GradientTexture1D_r82u1")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://ct42ti53jtdon"]
 
-[ext_resource type="Script" path="res://src/checkpoint.gd" id="1_gmy0m"]
+[ext_resource type="Script" path="res://objects/checkpoint.gd" id="1_u5py1"]
 [ext_resource type="AudioStream" uid="uid://r8pnmokye0e2" path="res://assets/audio/items/Fantasy_Game_Item_Collect_Magic_G.wav" id="2_l3jao"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_16yg6"]
@@ -19,7 +19,7 @@ colors = PackedColorArray(0.890196, 0.878431, 0.203922, 1, 0.89, 0.878578, 0.204
 
 [node name="checkpoint" type="Node2D"]
 z_index = -1
-script = ExtResource("1_gmy0m")
+script = ExtResource("1_u5py1")
 
 [node name="Area2D" type="Area2D" parent="."]
 scale = Vector2(3, 3)
