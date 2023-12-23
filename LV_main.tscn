@@ -133,4 +133,4 @@ autoplay = true
 bus = &"Ambient"
 
 [node name="slime" parent="." instance=ExtResource("7_j82dl")]
-position = Vector2(945, 581)
+position = Vector2(954, 507)

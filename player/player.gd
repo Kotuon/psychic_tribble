@@ -1,18 +1,5 @@
-extends CharacterBody2D
+extends CharacterBase
 class_name Player
-
-@export var size : float
-
-#Walk
-@export var max_walk_speed = 350
-@export var walk_acceleration = 600
-@export var brake_speed = 1250
-@export var turn_speed = 1000000
-
-var last_non_zero_input = Vector2(0,1)
-
-var current_walk_speed = 0
-var can_walk = true
 
 # Abilities
 @onready var dash = $Dash
@@ -20,37 +7,23 @@ var can_walk = true
 
 # Attack
 @onready var attack_hitbox = $Attack/Attack_Area/Attack_Hitbox
+@onready var attack_area = $Attack/Attack_Area
 
 # Taking damage
 var can_take_damage = true
 var in_hazard = false
 
-# Animations
-@onready var animation_player = $AnimationPlayer
-@onready var sprite = $Sprite2D
-
 var most_recent_checkpoint : Node2D
-
-var rng = RandomNumberGenerator.new()
-
-# Audio
-@onready var footstep_audioplayer = $Footstep_AudioPlayer
-@onready var hit_audioplayer = $Hit_AudioPlayer
-
-@export var footstep_sounds : Array[AudioStream]
-@export var hit_sounds : Array[AudioStream]
-
-func _draw():
-    pass
-    #draw_rect(Rect2(-size/2,-size/2,size, size), Color.SPRING_GREEN)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    super._ready()
     animation_player.play("front_idle")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-    walk(delta)
+    var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+    walk(delta, direction)
 
 func _input(event: InputEvent):
     if event.is_action_pressed("dash"):
@@ -58,111 +31,6 @@ func _input(event: InputEvent):
 
     if event.is_action_pressed("attack"):
         attack.start()
-
-func update_current_walk_speed(delta, direction : Vector2):
-    if direction.length_squared() > 0.0:
-        if current_walk_speed < max_walk_speed:
-            current_walk_speed += walk_acceleration * delta
-        else:
-            current_walk_speed = max_walk_speed
-    else:
-        if current_walk_speed > 0.0:
-            current_walk_speed -= brake_speed * delta
-        else:
-            current_walk_speed = 0.0
-
-func get_animation_direction(direction : Vector2) -> StringName:
-    var animation_direction = "front"
-    attack_hitbox.position = Vector2(0.0, 30.0)
-    attack_hitbox.rotation = 0
-
-    if direction.y > 0.0:
-        if direction.x == 0.0:
-            animation_direction = "front"
-            attack_hitbox.position = Vector2(0.0, 30.0)
-            attack_hitbox.rotation = 0
-        else:
-            if direction.x > 0.0:
-                sprite.flip_h = false
-                animation_direction = "front_side"
-                attack_hitbox.position = Vector2(21.0, 21.0)
-                attack_hitbox.rotation = -PI/4.0
-            elif direction.x < 0.0:
-                sprite.flip_h = true
-                animation_direction = "front_side"
-                attack_hitbox.position = Vector2(-21.0, 21.0)
-                attack_hitbox.rotation = PI/4.0
-    elif direction.y < 0.0:
-        if direction.x == 0.0:
-            animation_direction = "back"
-            attack_hitbox.position = Vector2(0.0, -30.0)
-            attack_hitbox.rotation = 0
-        else:
-            if direction.x > 0.0:
-                sprite.flip_h = false
-                animation_direction = "back_side"
-                attack_hitbox.position = Vector2(21.0, -21.0)
-                attack_hitbox.rotation = PI/4.0
-            elif direction.x < 0.0:
-                sprite.flip_h = true
-                animation_direction = "back_side"
-                attack_hitbox.position = Vector2(-21.0, -21.0)
-                attack_hitbox.rotation = -PI/4.0
-    else:
-        if direction.x > 0.0:
-            sprite.flip_h = false
-            animation_direction = "side"
-            attack_hitbox.position = Vector2(30.0, 0.0)
-            attack_hitbox.rotation = PI/2.0
-        elif direction.x < 0.0:
-            sprite.flip_h = true
-            animation_direction = "side"
-            attack_hitbox.position = Vector2(-30.0, 0.0)
-            attack_hitbox.rotation = PI/2.0
-
-    return animation_direction
-
-func walk(delta):
-    if !can_walk:
-        return
-
-    var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-    if direction.length_squared() > 0.0:
-        last_non_zero_input = direction
-
-    update_current_walk_speed(delta, direction)
-    if velocity.normalized() == (direction.normalized() * -1.0):
-        direction += (direction.orthogonal() * turn_speed)
-
-    velocity = (velocity + (direction * turn_speed)).normalized() * current_walk_speed
-
-    var animation_direction = get_animation_direction(velocity)
-
-    if current_walk_speed == 0.0:
-        animation_player.play(get_animation_direction(last_non_zero_input) + "_idle")
-    elif current_walk_speed < 200:
-        animation_player.play(animation_direction + "_walk")
-        play_footstep_sound()
-    else:
-        animation_player.play(animation_direction + "_run")
-        play_footstep_sound()
-    move_and_slide()
-
-func play_footstep_sound():
-    if footstep_audioplayer.is_playing(): 
-        return
-    
-    var random_index = rng.randi_range(0,footstep_sounds.size() - 1)
-    footstep_audioplayer.stream = footstep_sounds[random_index]
-    footstep_audioplayer.play()
-
-func play_hit_sound():
-    if hit_audioplayer.is_playing(): 
-        return
-    
-    var random_index = rng.randi_range(0,hit_sounds.size() - 1)
-    hit_audioplayer.stream = hit_sounds[random_index]
-    hit_audioplayer.play()
 
 func kill():
     print("You have died.")

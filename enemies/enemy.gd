@@ -1,10 +1,18 @@
 extends CharacterBody2D
 class_name Enemy
 
+# Abilities
+var ability_list : Array[Ability]
+
+# Player information
 var player : Node2D
+var can_see_player = false
+var distance_from_player : float
+
+# Health
 var health = 3
 
-#Walk
+# Walk
 @export var max_walk_speed = 200
 @export var walk_acceleration = 600
 @export var brake_speed = 1250
@@ -30,15 +38,24 @@ var flicker_counter = 0.0
 var flicker_amount = 4
 var times_flickered = 0
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     player = get_node("../Player")
     time_to_flicker = total_flicker_time / flicker_amount
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-    walk(delta)
+func _physics_process(_delta: float) -> void:
+    var space_state = get_world_2d().direct_space_state
+    var query_for_player = PhysicsRayQueryParameters2D.create(position, player.position)
+    var quety_result = space_state.intersect_ray(query_for_player)
     
+    can_see_player = false
+    if quety_result:
+        if quety_result.collider is Player:
+            can_see_player = true
+
+func _process(delta: float) -> void:
+    flicker(delta)
+
+func flicker(delta: float) -> void:
     if is_flickering:
         flicker_counter += delta
         var t = flicker_counter / time_to_flicker
@@ -108,8 +125,8 @@ func update_current_walk_speed(delta, direction : Vector2):
         else:
             current_walk_speed = 0.0
 
-func walk(delta):
-    var direction = (player.position - position).normalized()
+func walk(delta: float, direction: Vector2) -> void:
+    #var direction = (player.position - position).normalized()
     if direction.length_squared() > 0.0:
         last_non_zero_input = direction
 
@@ -129,5 +146,4 @@ func walk(delta):
         animation_player.play(get_animation_direction(last_non_zero_input) + "_idle")
     else:
         animation_player.play(animation_direction + "_walk")
-        #play_footstep_sound()
     move_and_slide()

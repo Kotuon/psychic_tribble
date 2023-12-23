@@ -1,8 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://brdm0dna3iywg"]
+[gd_scene load_steps=15 format=3 uid="uid://brdm0dna3iywg"]
 
 [ext_resource type="PackedScene" uid="uid://cku42w0rkx1wt" path="res://enemies/enemy.tscn" id="1_vy25f"]
 [ext_resource type="Texture2D" uid="uid://372bxb6h76jv" path="res://assets/art/Slimes/Updated Slime Antenna/Slime_Antenna_Idle.png" id="2_pgt1j"]
 [ext_resource type="Texture2D" uid="uid://df0fecw07iuav" path="res://assets/art/Slimes/Updated Slime Antenna/Slime_Antenna_Move.png" id="3_eo2kk"]
+[ext_resource type="PackedScene" uid="uid://bqs7w7k78siym" path="res://enemies/states/idle.tscn" id="4_pt1t3"]
+[ext_resource type="PackedScene" uid="uid://cqg40v1xacdfd" path="res://enemies/states/chase.tscn" id="5_aibep"]
 
 [sub_resource type="Animation" id="Animation_fasdm"]
 length = 0.6
@@ -532,8 +534,6 @@ _data = {
 "side_walk": SubResource("Animation_vmivv")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_cliin"]
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y08fa"]
 radius = 15.0
 height = 38.8
@@ -553,10 +553,11 @@ libraries = {
 "": SubResource("AnimationLibrary_mt2kb")
 }
 
-[node name="Enemy_Hitbox" parent="." index="2"]
-shape = SubResource("CircleShape2D_cliin")
-
 [node name="Attack_Hitbox" parent="." index="3"]
 position = Vector2(0, 7.2)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_y08fa")
+
+[node name="Idle" parent="." index="4" instance=ExtResource("4_pt1t3")]
+
+[node name="Chase" parent="." index="5" instance=ExtResource("5_aibep")]

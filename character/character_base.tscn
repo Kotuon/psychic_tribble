@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://djicriy84rtem"]
+
+[ext_resource type="Script" path="res://character/character_base.gd" id="1_2wuao"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5cj1p"]
+
+[node name="character_base" type="CharacterBody2D"]
+script = ExtResource("1_2wuao")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5cj1p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Footstep_AudioPlayer" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Hit_AudioPlayer" type="AudioStreamPlayer2D" parent="."]

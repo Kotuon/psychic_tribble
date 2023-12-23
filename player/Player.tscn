@@ -1900,14 +1900,12 @@ _data = {
 "side_walk": SubResource("Animation_bllxo")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ri11x"]
-size = Vector2(100, 60)
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3h7wf"]
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 floor_stop_on_slope = false
 script = ExtResource("1_i7h6x")
-size = 50.0
 footstep_sounds = Array[AudioStream]([ExtResource("2_jy20e"), ExtResource("3_ghg36"), ExtResource("4_6iq4f"), ExtResource("5_jdfwg"), ExtResource("6_t45me"), ExtResource("7_ob61q"), ExtResource("8_trirk"), ExtResource("9_4q7b0"), ExtResource("10_rnnww"), ExtResource("11_5wtk2")])
 hit_sounds = Array[AudioStream]([ExtResource("12_1c3oy"), ExtResource("13_kxyi2")])
 
@@ -1917,7 +1915,8 @@ shape = SubResource("CapsuleShape2D_6ud2j")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
 libraries = {
-"": SubResource("AnimationLibrary_lfg78")
+"": SubResource("AnimationLibrary_lfg78"),
+"Player_Animations": SubResource("AnimationLibrary_3h7wf")
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -1933,19 +1932,11 @@ position_smoothing_speed = 4.0
 
 [node name="Dash" parent="." instance=ExtResource("17_2vuqu")]
 dash_distance = 250
-cooldown = 1.0
 sound_effects = Array[AudioStream]([ExtResource("28_4o63s")])
 
 [node name="Attack" parent="." instance=ExtResource("18_panjm")]
 cooldown = 0.05
 sound_effects = Array[AudioStream]([ExtResource("29_hpvr5")])
-
-[node name="Attack_Area" type="Area2D" parent="Attack"]
-
-[node name="Attack_Hitbox" type="CollisionShape2D" parent="Attack/Attack_Area"]
-position = Vector2(0, 30)
-shape = SubResource("RectangleShape2D_ri11x")
-disabled = true
 
 [node name="Footstep_AudioPlayer" type="AudioStreamPlayer2D" parent="."]
 volume_db = -10.826
@@ -1954,5 +1945,3 @@ bus = &"SFX"
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
 
 [node name="Hit_AudioPlayer" type="AudioStreamPlayer2D" parent="."]
-
-[connection signal="body_entered" from="Attack/Attack_Area" to="Attack" method="_on_attack_area_body_entered"]

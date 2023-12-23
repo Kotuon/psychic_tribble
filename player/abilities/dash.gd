@@ -17,7 +17,17 @@ func _ready() -> void:
 func _process(delta: float) -> void:
     super._process(delta)
     if is_running:
-        update(delta)
+        time_since_dash_started += delta
+        trail_counter -= delta
+
+        if trail_counter <= 0.0:
+            spawn_trail()
+            trail_counter = time_between_trail
+
+        parent.move_and_slide()
+
+        if time_since_dash_started > time_to_dash:
+            end()
 
 func start() -> bool:
     if (!super.start()):
@@ -38,20 +48,6 @@ func start() -> bool:
     trail_counter = time_between_trail
 
     return true
-
-func update(delta: float) -> void:
-    super.update(delta)
-    time_since_dash_started += delta
-    trail_counter -= delta
-    
-    if trail_counter <= 0.0:
-        spawn_trail()
-        trail_counter = time_between_trail
-
-    parent.move_and_slide()
-
-    if time_since_dash_started > time_to_dash:
-        end()
 
 func end() -> void:
     super.end()

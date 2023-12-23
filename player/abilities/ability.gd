@@ -1,9 +1,9 @@
 extends Node2D
 class_name Ability
 
-var parent : Player
+var parent : CharacterBody2D
 
-@export var cooldown : float
+@export var cooldown = 1.0
 var is_running = false
 
 @onready var cooldown_timer = $Cooldown
@@ -25,10 +25,11 @@ func start() -> bool:
     if on_cooldown:
         return false
 
-    return true
+    for ability in parent.ability_list:
+        if ability != self && ability.is_running:
+            return false
 
-func update(_delta: float) -> void:
-    pass
+    return true
 
 func end() -> void:
     on_cooldown = true
@@ -36,7 +37,6 @@ func end() -> void:
 
 func play_sound():
     pass
-
 
 func _on_cooldown_timeout() -> void:
     on_cooldown = false
