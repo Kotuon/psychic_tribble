@@ -39,7 +39,7 @@ var flicker_amount = 4
 var times_flickered = 0
 
 func _ready() -> void:
-    player = get_node("../Player")
+    player = get_node("../player")
     time_to_flicker = total_flicker_time / flicker_amount
 
 func _physics_process(_delta: float) -> void:

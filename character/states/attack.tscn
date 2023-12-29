@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://bboby1p53hu7k"]
 
-[ext_resource type="PackedScene" uid="uid://0r5mm4yt5bnb" path="res://player/abilities/ability.tscn" id="1_li05q"]
-[ext_resource type="Script" path="res://player/abilities/attack.gd" id="1_uqxc3"]
+[ext_resource type="Script" path="res://character/states/attack.gd" id="1_ajom8"]
+[ext_resource type="PackedScene" uid="uid://0r5mm4yt5bnb" path="res://character/states/ability.tscn" id="1_cmfcp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_asw4n"]
 size = Vector2(100, 80)
 
-[node name="attack" instance=ExtResource("1_li05q")]
-script = ExtResource("1_uqxc3")
+[node name="attack" instance=ExtResource("1_cmfcp")]
+script = ExtResource("1_ajom8")
 attack_damage = 1
 
 [node name="Ability_AudioPlayer" parent="." index="0"]

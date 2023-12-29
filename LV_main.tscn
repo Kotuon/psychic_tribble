@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://jgk5arowrp2t"]
 
-[ext_resource type="PackedScene" uid="uid://b1klx5r40rdl5" path="res://player/Player.tscn" id="1_kx2pb"]
+[ext_resource type="PackedScene" uid="uid://dapv32tmbt4nj" path="res://player/player.tscn" id="1_46s1b"]
 [ext_resource type="PackedScene" uid="uid://drd5gnki01kge" path="res://objects/wall.tscn" id="2_42i5r"]
 [ext_resource type="PackedScene" uid="uid://ww0cw6ukpvsj" path="res://objects/traps/spikes.tscn" id="3_n57gs"]
 [ext_resource type="PackedScene" uid="uid://ct42ti53jtdon" path="res://objects/checkpoint.tscn" id="4_0tuwm"]
@@ -13,8 +13,8 @@ font_size = 66
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_kx2pb")]
-position = Vector2(960, 810)
+[node name="player" parent="." instance=ExtResource("1_46s1b")]
+position = Vector2(684, 819)
 
 [node name="Walls" type="Node" parent="."]
 

@@ -103,7 +103,7 @@ func walk(delta: float, direction: Vector2) -> void:
         animation_player.play(get_animation_direction(last_non_zero_input) + "_idle")
     else:
         play_footstep_sound()
-        if can_run && current_walk_speed < run_cutoff:
+        if can_run && current_walk_speed > run_cutoff:
             animation_player.play(animation_direction + "_run")
         else:
             animation_player.play(animation_direction + "_walk")

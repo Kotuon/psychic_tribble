@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqs7w7k78siym"]
-
-[ext_resource type="PackedScene" uid="uid://0r5mm4yt5bnb" path="res://player/abilities/ability.tscn" id="1_li05q"]
-[ext_resource type="Script" path="res://enemies/states/idle.gd" id="2_7ecl7"]
-
-[node name="idle" instance=ExtResource("1_li05q")]
-script = ExtResource("2_7ecl7")
-idle_time = 5.0
