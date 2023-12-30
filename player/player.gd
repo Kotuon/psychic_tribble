@@ -22,6 +22,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+    super._process(delta)
     var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
     walk(delta, direction)
 
@@ -33,7 +34,7 @@ func _input(event: InputEvent):
         attack.start()
 
 func kill():
-    print("You have died.")
+    super.kill()
 
     current_walk_speed = 0.0
     play_hit_sound()

@@ -88,7 +88,7 @@ func update_hitbox_position(direction: String) -> void:
             attack_area.rotation = 0
             attack_area.position = Vector2(0.0, 40.0)
         "front_side":
-            if parent.sprite.fliph == false:
+            if parent.sprite.flip_h == false:
                 attack_area.rotation = -PI/4.0
                 attack_area.position = Vector2(28.0, 28.0)
             else:
@@ -98,15 +98,15 @@ func update_hitbox_position(direction: String) -> void:
             attack_area.rotation = 0
             attack_area.position = Vector2(0.0, -40.0)
         "back_side":
-            if parent.sprite.fliph == false:
-                attack_area.rotation = -PI/4.0
-                attack_area.position = Vector2(28.0, 28.0)
-            else:
+            if parent.sprite.flip_h == false:
                 attack_area.rotation = PI/4.0
-                attack_area.position = Vector2(-28.0, 28.0)
+                attack_area.position = Vector2(28.0, -28.0)
+            else:
+                attack_area.rotation = -PI/4.0
+                attack_area.position = Vector2(-28.0, -28.0)
         "side":
             attack_area.rotation = PI/2.0
-            if parent.sprite.fliph == false:
+            if parent.sprite.flip_h == false:
                 attack_area.position = Vector2(40.0, 0.0)
             else:
                 attack_area.position = Vector2(-40.0, 0.0)

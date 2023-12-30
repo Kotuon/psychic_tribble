@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ct42ti53jtdon" path="res://objects/checkpoint.tscn" id="4_0tuwm"]
 [ext_resource type="PackedScene" uid="uid://jix85le31wwy" path="res://objects/traps/moving_trap.tscn" id="5_nuojl"]
 [ext_resource type="AudioStream" uid="uid://dkp42xwrgacp6" path="res://assets/audio/ambient/Fantasy_World_Loop_Ambience_Crystal_Maze_Full_Swirling_Ancient_Movement_Motion_LFO_Modulation_Cm.wav" id="6_5h4ko"]
-[ext_resource type="PackedScene" uid="uid://brdm0dna3iywg" path="res://enemies/slime.tscn" id="7_j82dl"]
+[ext_resource type="PackedScene" uid="uid://cqlnvsxtn6mro" path="res://enemies/slime.tscn" id="7_v5b6w"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_v36pa"]
 font_size = 66
@@ -15,6 +15,7 @@ font_size = 66
 
 [node name="player" parent="." instance=ExtResource("1_46s1b")]
 position = Vector2(684, 819)
+eight_directions = null
 
 [node name="Walls" type="Node" parent="."]
 
@@ -132,5 +133,5 @@ stream = ExtResource("6_5h4ko")
 autoplay = true
 bus = &"Ambient"
 
-[node name="slime" parent="." instance=ExtResource("7_j82dl")]
-position = Vector2(954, 507)
+[node name="slime" parent="." instance=ExtResource("7_v5b6w")]
+position = Vector2(955, 600)

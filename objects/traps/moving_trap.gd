@@ -42,6 +42,6 @@ func _process(delta: float) -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-    if body.name == "Player":
+    if body.name == "player":
         if body.can_take_damage:
             body.kill()

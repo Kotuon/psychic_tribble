@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dapv32tmbt4nj"]
+[gd_scene load_steps=22 format=3 uid="uid://dapv32tmbt4nj"]
 
 [ext_resource type="PackedScene" uid="uid://djicriy84rtem" path="res://character/character_base.tscn" id="1_t6k54"]
 [ext_resource type="Script" path="res://player/player.gd" id="2_yt7a2"]
@@ -21,12 +21,20 @@
 [ext_resource type="AudioStream" uid="uid://v2gjo7fbt75r" path="res://assets/audio/abilities/Fantasy_Game_Item_Collect_Magic_A.wav" id="18_0tbli"]
 [ext_resource type="AudioStream" uid="uid://dxfn6qvpay3u5" path="res://assets/audio/attack/Fantasy_Game_Attack_Blade_Draw_1.wav" id="19_kvb2n"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ny1lx"]
+radius = 15.0
+height = 64.0
+
 [node name="player" instance=ExtResource("1_t6k54")]
 z_index = 1
 floor_stop_on_slope = false
 script = ExtResource("2_yt7a2")
+eight_directions = null
 footstep_sounds = Array[AudioStream]([ExtResource("3_733wa"), ExtResource("4_dpnyj"), ExtResource("5_0u6x3"), ExtResource("6_q2w77"), ExtResource("7_m34f0"), ExtResource("8_cd0xu"), ExtResource("9_a6xal"), ExtResource("10_n2w7u"), ExtResource("11_gkasv"), ExtResource("12_jv3vn")])
 hit_sounds = Array[AudioStream]([ExtResource("13_h4y4f"), ExtResource("14_8i635")])
+
+[node name="Character_Hitbox" parent="." index="0"]
+shape = SubResource("CapsuleShape2D_ny1lx")
 
 [node name="Sprite2D" parent="." index="1"]
 scale = Vector2(3, 3)
@@ -41,11 +49,15 @@ libraries = {
 "": ExtResource("3_tau3u")
 }
 
-[node name="Camera2D" type="Camera2D" parent="." index="5"]
+[node name="AudioListener2D" type="AudioListener2D" parent="." index="5"]
+current = true
 
-[node name="Dash" parent="." index="6" instance=ExtResource("4_3r6yc")]
+[node name="Camera2D" type="Camera2D" parent="." index="6"]
+
+[node name="Dash" parent="." index="7" instance=ExtResource("4_3r6yc")]
 dash_distance = 250
 sound_effects = Array[AudioStream]([ExtResource("18_0tbli")])
 
-[node name="Attack" parent="." index="7" instance=ExtResource("5_jojui")]
+[node name="Attack" parent="." index="8" instance=ExtResource("5_jojui")]
+cooldown = 0.05
 sound_effects = Array[AudioStream]([ExtResource("19_kvb2n")])

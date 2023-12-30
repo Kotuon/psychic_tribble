@@ -7,7 +7,7 @@
 [node name="character_base" type="CharacterBody2D"]
 script = ExtResource("1_2wuao")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Character_Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_5cj1p")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

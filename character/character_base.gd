@@ -26,6 +26,14 @@ var can_walk = true
 @export var footstep_sounds : Array[AudioStream]
 @export var hit_sounds : Array[AudioStream]
 
+# Hit
+@export var total_flicker_time = 0.8
+var time_to_flicker : float
+var is_flickering = false
+var flicker_counter = 0.0
+var flicker_amount = 4
+var times_flickered = 0
+
 #Abilities
 var ability_list : Array[Ability]
 
@@ -33,9 +41,14 @@ var ability_list : Array[Ability]
 var rng = RandomNumberGenerator.new()
 
 func _ready() -> void:
+    time_to_flicker = total_flicker_time / flicker_amount
+
     for child in get_children():
         if child is Ability:
             ability_list.push_back(child)
+
+func _process(delta: float) -> void:
+    flicker(delta)
 
 func update_current_walk_speed(delta, direction : Vector2):
     if direction.length_squared() > 0.0:
@@ -112,7 +125,10 @@ func walk(delta: float, direction: Vector2) -> void:
 func play_footstep_sound():
     if footstep_audioplayer.is_playing(): 
         return
-    
+
+    if footstep_sounds.size() == 0:
+        return
+
     var random_index = rng.randi_range(0,footstep_sounds.size() - 1)
     footstep_audioplayer.stream = footstep_sounds[random_index]
     footstep_audioplayer.play()
@@ -125,3 +141,32 @@ func play_hit_sound():
     hit_audioplayer.stream = hit_sounds[random_index]
     hit_audioplayer.play()
 
+func flicker(delta: float) -> void:
+    if is_flickering:
+        flicker_counter += delta
+        var t = flicker_counter / time_to_flicker
+
+        if times_flickered % 2 == 0:
+            modulate.a = 1 - t
+        else:
+            modulate.a = t
+
+        if t > 1.0:
+            times_flickered += 1
+            flicker_counter = 0.0
+        
+        if times_flickered >= flicker_amount:
+            is_flickering = false
+
+func kill():
+    print(name + " has died.")
+
+func take_damage(damage: int) -> void:
+    health -= damage
+
+    is_flickering = true
+    flicker_counter = 0.0
+    times_flickered = 0
+
+    if health <= 0:
+        kill()

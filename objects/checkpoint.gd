@@ -13,9 +13,9 @@ func _process(_delta: float) -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-    if body.name == "Player":
-        print("Hit checkpoint.")
+    if body.name == "player":
         if body.most_recent_checkpoint != self:
+            print("Hit checkpoint.")
             $Effect.restart()
             audioplayer.play()
         body.most_recent_checkpoint = self

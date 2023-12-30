@@ -1,7 +1,7 @@
 extends Node2D
 class_name Ability
 
-var parent : CharacterBody2D
+var parent : CharacterBase
 
 @export var cooldown = 1.0
 var is_running = false
@@ -14,12 +14,7 @@ var on_cooldown = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    print("Getting parent.")
     parent = get_owner()
-    if parent == null:
-        print("Not valid parent.")
-    else:
-        print("Valid parent.")
     cooldown_timer.wait_time = cooldown
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
