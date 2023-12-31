@@ -31,6 +31,3 @@ func start() -> bool:
 
 func end() -> void:
     super.end()
-
-func play_sound():
-    pass

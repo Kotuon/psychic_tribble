@@ -44,14 +44,12 @@ func start() -> bool:
 
     parent.animation_player.play(parent.get_animation_direction(dash_direction) + "_dash")
     parent.velocity = dash_direction * (dash_distance / time_to_dash)
-    play_sound()
+    play_sound(0.0)
     trail_counter = time_between_trail
 
     return true
 
 func end() -> void:
-    super.end()
-
     parent.can_walk = true
     is_running = false
     parent.can_take_damage = true
@@ -61,12 +59,14 @@ func end() -> void:
     if parent.in_hazard:
         parent.kill()
 
-func play_sound():
+    super.end()
+
+func play_sound(start_position: float) -> void:
     if ability_audioplayer.is_playing():
         ability_audioplayer.stop()
 
     ability_audioplayer.stream = sound_effects[0]
-    ability_audioplayer.play()
+    ability_audioplayer.play(start_position)
 
 func spawn_trail():
     var this_trail = preload("res://player/dash_trail.tscn").instantiate()

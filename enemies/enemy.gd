@@ -22,6 +22,7 @@ func _physics_process(_delta: float) -> void:
 
 func _process(delta: float) -> void:
     super._process(delta)
+    distance_from_player = position.distance_to(player.position)
 
 func kill():
     queue_free()

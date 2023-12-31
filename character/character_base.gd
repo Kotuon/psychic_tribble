@@ -3,6 +3,8 @@ class_name CharacterBase
 
 # Health
 @export var health = 3
+var can_take_damage = true
+var in_hazard = false
 
 # Movement
 @export var max_walk_speed = 350
@@ -36,6 +38,8 @@ var times_flickered = 0
 
 #Abilities
 var ability_list : Array[Ability]
+var current_action = -1
+var queued_action = -1
 
 # Random
 var rng = RandomNumberGenerator.new()
@@ -45,6 +49,7 @@ func _ready() -> void:
 
     for child in get_children():
         if child is Ability:
+            child.action_id = ability_list.size()
             ability_list.push_back(child)
 
 func _process(delta: float) -> void:
@@ -63,26 +68,27 @@ func update_current_walk_speed(delta, direction : Vector2):
             current_walk_speed = 0.0
 
 func get_animation_direction(direction : Vector2) -> StringName:
+    direction = direction.normalized()
     var animation_direction = "front"
 
-    if direction.y > 0.0:
-        if direction.x == 0.0:
+    if direction.y > 0.1:
+        if abs(direction.x) < 0.1:
             animation_direction = "front"
         else:
-            if direction.x > 0.0:
+            if direction.x > 0.1:
                 sprite.flip_h = false
                 animation_direction = "front_side"
-            elif direction.x < 0.0:
+            elif direction.x < -0.1:
                 sprite.flip_h = true
                 animation_direction = "front_side"
-    elif direction.y < 0.0:
-        if direction.x == 0.0:
+    elif direction.y < -0.1:
+        if abs(direction.x) < 0.1:
             animation_direction = "back"
         else:
-            if direction.x > 0.0:
+            if direction.x > 0.1:
                 sprite.flip_h = false
                 animation_direction = "back_side"
-            elif direction.x < 0.0:
+            elif direction.x < -0.1:
                 sprite.flip_h = true
                 animation_direction = "back_side"
     else:
@@ -96,7 +102,6 @@ func get_animation_direction(direction : Vector2) -> StringName:
     return animation_direction
 
 func walk(delta: float, direction: Vector2) -> void:
-    #var direction = (player.position - position).normalized()
     if direction.length_squared() > 0.0:
         last_non_zero_input = direction
 
@@ -170,3 +175,7 @@ func take_damage(damage: int) -> void:
 
     if health <= 0:
         kill()
+
+func change_action(new_action: int):
+    if ability_list[new_action].start():
+        current_action = new_action

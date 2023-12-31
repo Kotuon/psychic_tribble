@@ -1,19 +1,11 @@
 extends CharacterBase
 class_name Player
 
-# Abilities
-@onready var dash = $Dash
-@onready var attack = $Attack
-
-# Attack
-@onready var attack_hitbox = $Attack/Attack_Area/Attack_Hitbox
-@onready var attack_area = $Attack/Attack_Area
-
-# Taking damage
-var can_take_damage = true
-var in_hazard = false
-
 var most_recent_checkpoint : Node2D
+
+@onready var dash = $Dash
+@onready var slash = $Slash
+@onready var stab = $Stab
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,10 +20,13 @@ func _process(delta):
 
 func _input(event: InputEvent):
     if event.is_action_pressed("dash"):
-        dash.start()
+        change_action(dash.action_id)
 
-    if event.is_action_pressed("attack"):
-        attack.start()
+    if event.is_action_pressed("slash"):
+        change_action(slash.action_id)
+
+    if event.is_action_pressed("stab"):
+        change_action(stab.action_id)
 
 func kill():
     super.kill()

@@ -5,4 +5,3 @@
 
 [node name="enemy" instance=ExtResource("1_yqepd")]
 script = ExtResource("2_6mf4f")
-eight_directions = null

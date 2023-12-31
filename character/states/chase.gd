@@ -10,6 +10,12 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
     super._process(delta)
+    
+   # if parent.can_see_player:
+    #    if parent.distance_from_player > 100:
+   #         if start():
+     #           parent.current_action = action_type
+
     if is_running:
         counter -= delta
 

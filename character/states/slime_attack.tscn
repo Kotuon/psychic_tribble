@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dakvtwrkcl28r"]
+
+[ext_resource type="PackedScene" uid="uid://bboby1p53hu7k" path="res://character/states/attack_base.tscn" id="1_y5rc3"]
+[ext_resource type="Script" path="res://character/states/slime_attack.gd" id="2_qgd4d"]
+
+[node name="slime_attack" instance=ExtResource("1_y5rc3")]
+script = ExtResource("2_qgd4d")
