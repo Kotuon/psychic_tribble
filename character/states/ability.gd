@@ -18,7 +18,6 @@ var on_cooldown = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    parent = get_owner()
     cooldown_timer.wait_time = cooldown
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

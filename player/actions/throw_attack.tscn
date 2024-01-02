@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmcw41vymj7r2"]
+
+[ext_resource type="PackedScene" uid="uid://bboby1p53hu7k" path="res://character/states/attack_base.tscn" id="1_y5234"]
+[ext_resource type="Script" path="res://player/actions/throw_attack.gd" id="2_wqt0v"]
+
+[node name="throw_attack" instance=ExtResource("1_y5234")]
+script = ExtResource("2_wqt0v")
+can_queue = true

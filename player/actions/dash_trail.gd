@@ -1,4 +1,5 @@
 extends Sprite2D
+class_name Dash_Trail
 
 @export var time_to_fade = 0.25
 @export var start_value = 0.4
@@ -6,6 +7,7 @@ var counter = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    modulate = modulate.darkened(0.2)
     pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

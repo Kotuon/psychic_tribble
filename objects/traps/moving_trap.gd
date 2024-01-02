@@ -13,6 +13,7 @@ var end_position : Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     start_position = position
+    distance_to_move /= 2.0
     end_position = start_position + (global_transform.basis_xform(Vector2.RIGHT) * distance_to_move)
     #global_transform.basis_xform(Vector2.RIGHT)
     #end_position = Vector2(start_position.x + distance_to_move, start_position.y)

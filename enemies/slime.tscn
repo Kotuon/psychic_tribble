@@ -3,9 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://ckp8pbos4m2tb" path="res://enemies/enemy.tscn" id="1_g00bv"]
 [ext_resource type="Script" path="res://enemies/slime.gd" id="2_nha11"]
 [ext_resource type="Texture2D" uid="uid://372bxb6h76jv" path="res://assets/art/Slimes/Updated Slime Antenna/Slime_Antenna_Idle.png" id="2_pgt1j"]
-[ext_resource type="PackedScene" uid="uid://bqs7w7k78siym" path="res://character/states/idle.tscn" id="4_pt1t3"]
+[ext_resource type="PackedScene" uid="uid://bqs7w7k78siym" path="res://enemies/actions/idle.tscn" id="4_pt1t3"]
 [ext_resource type="AnimationLibrary" uid="uid://bvy7v0dtejxeq" path="res://assets/art/Slimes/Updated Slime Antenna/SlimeAnimations.res" id="4_rldbi"]
-[ext_resource type="PackedScene" uid="uid://cqg40v1xacdfd" path="res://character/states/chase.tscn" id="5_aibep"]
+[ext_resource type="PackedScene" uid="uid://cqg40v1xacdfd" path="res://enemies/actions/chase.tscn" id="5_aibep"]
 [ext_resource type="PackedScene" uid="uid://bboby1p53hu7k" path="res://character/states/attack_base.tscn" id="7_culws"]
 
 [node name="slime" instance=ExtResource("1_g00bv")]

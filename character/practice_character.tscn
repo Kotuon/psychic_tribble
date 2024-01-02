@@ -1,0 +1,27 @@
+[gd_scene load_steps=8 format=3 uid="uid://qmsxk36uoc1d"]
+
+[ext_resource type="PackedScene" uid="uid://djicriy84rtem" path="res://character/character_base.tscn" id="1_t7ece"]
+[ext_resource type="AudioStream" uid="uid://dwne8kbqlkexj" path="res://assets/audio/hit/Fantasy_Game_Weapons_Wood Shield_1_Block_Defend_Buckler_Deflect.wav" id="2_7u0vk"]
+[ext_resource type="Texture2D" uid="uid://bxhdr4ntiq0ke" path="res://assets/art/Red_Sprite/New/Front Shield.png" id="2_o0h7r"]
+[ext_resource type="AudioStream" uid="uid://dfu2b4laikby" path="res://assets/audio/hit/Fantasy_Game_Weapons_Wood Shield_2_Block_Defend_Buckler_Deflect.wav" id="3_njl1j"]
+[ext_resource type="AudioStream" uid="uid://d4fnkkd3354wp" path="res://assets/audio/hit/Fantasy_Game_Weapons_Wood Shield_3_Block_Defend_Buckler_Deflect.wav" id="4_folyx"]
+[ext_resource type="AudioStream" uid="uid://3mkehjcpnwjl" path="res://assets/audio/hit/Fantasy_Game_Weapons_Wood Shield_4_Block_Defend_Buckler_Deflect.wav" id="5_yfvqk"]
+[ext_resource type="AudioStream" uid="uid://dxtm7w7olydyb" path="res://assets/audio/hit/Fantasy_Game_Weapons_Wood Shield_5_Block_Defend_Buckler_Deflect.wav" id="6_ro4ae"]
+
+[node name="practice_character" instance=ExtResource("1_t7ece")]
+hit_sounds = Array[AudioStream]([ExtResource("2_7u0vk"), ExtResource("3_njl1j"), ExtResource("4_folyx"), ExtResource("5_yfvqk"), ExtResource("6_ro4ae")])
+
+[node name="Sprite2D" parent="." index="1"]
+modulate = Color(0.705882, 0.705882, 0.705882, 0.862745)
+scale = Vector2(3, 3)
+texture = ExtResource("2_o0h7r")
+hframes = 3
+vframes = 3
+frame = 7
+
+[node name="Footstep_AudioPlayer" parent="." index="3"]
+bus = &"SFX"
+
+[node name="Hit_AudioPlayer" parent="." index="4"]
+volume_db = -6.0
+bus = &"SFX"

@@ -50,6 +50,7 @@ func _ready() -> void:
     for child in get_children():
         if child is Ability:
             child.action_id = ability_list.size()
+            child.parent = self
             ability_list.push_back(child)
 
 func _process(delta: float) -> void:
@@ -139,9 +140,12 @@ func play_footstep_sound():
     footstep_audioplayer.play()
 
 func play_hit_sound():
-    if hit_audioplayer.is_playing(): 
+    #if hit_audioplayer.is_playing(): 
+    #    return
+
+    if hit_sounds.size() == 0:
         return
-    
+
     var random_index = rng.randi_range(0,hit_sounds.size() - 1)
     hit_audioplayer.stream = hit_sounds[random_index]
     hit_audioplayer.play()
@@ -168,6 +172,13 @@ func kill():
 
 func take_damage(damage: int) -> void:
     health -= damage
+
+    var this_text = preload("res://objects/floating_text.tscn").instantiate()
+    get_parent().add_child(this_text)
+    this_text.position = position
+    this_text.get_node("Label").text = str(damage)
+
+    play_hit_sound()
 
     is_flickering = true
     flicker_counter = 0.0

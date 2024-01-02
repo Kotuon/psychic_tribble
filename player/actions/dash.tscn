@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://8iwfrqw1cfik"]
+
+[ext_resource type="PackedScene" uid="uid://0r5mm4yt5bnb" path="res://character/states/ability.tscn" id="1_8lp06"]
+[ext_resource type="Script" path="res://player/actions/dash.gd" id="2_0oy2f"]
+
+[node name="dash" instance=ExtResource("1_8lp06")]
+script = ExtResource("2_0oy2f")
+time_to_dash = 0.2
+dash_distance = 200
+time_between_trail = 0.01
+
+[node name="Ability_AudioPlayer" parent="." index="0"]
+volume_db = -5.0

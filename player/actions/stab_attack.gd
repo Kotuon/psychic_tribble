@@ -45,7 +45,7 @@ func end() -> void:
     is_running = false
     parent.can_walk = true
     attack_hitbox.disabled = true
-    parent.current_walk_speed = 0
+    #parent.current_walk_speed = 0
     super.end()
 
 func stop_movement() -> void:

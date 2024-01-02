@@ -53,8 +53,8 @@ func end() -> void:
     parent.can_walk = true
     is_running = false
     parent.can_take_damage = true
-    parent.velocity = Vector2.ZERO
-    parent.current_walk_speed = 0.0
+    #parent.velocity = Vector2.ZERO
+    parent.current_walk_speed = parent.current_walk_speed / 2.0
 
     if parent.in_hazard:
         parent.kill()

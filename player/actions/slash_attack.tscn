@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4fhr6pj63qo4"]
+
+[ext_resource type="PackedScene" uid="uid://bboby1p53hu7k" path="res://character/states/attack_base.tscn" id="1_0s4uv"]
+[ext_resource type="Script" path="res://player/actions/slash_attack.gd" id="2_0b0bc"]
+
+[node name="slash_attack" instance=ExtResource("1_0s4uv")]
+script = ExtResource("2_0b0bc")

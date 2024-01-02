@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bqs7w7k78siym"]
 
 [ext_resource type="PackedScene" uid="uid://0r5mm4yt5bnb" path="res://character/states/ability.tscn" id="1_ytwf8"]
-[ext_resource type="Script" path="res://character/states/idle.gd" id="2_41asb"]
+[ext_resource type="Script" path="res://enemies/actions/idle.gd" id="2_41asb"]
 
 [node name="idle" instance=ExtResource("1_ytwf8")]
 script = ExtResource("2_41asb")

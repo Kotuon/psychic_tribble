@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bglbr6srh4n72"]
+
+[ext_resource type="PackedScene" uid="uid://bboby1p53hu7k" path="res://character/states/attack_base.tscn" id="1_lpgov"]
+[ext_resource type="Script" path="res://player/actions/stab_attack.gd" id="2_ex7u7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sda5e"]
+size = Vector2(60, 120)
+
+[node name="stab_attack" instance=ExtResource("1_lpgov")]
+script = ExtResource("2_ex7u7")
+distance = 100
+time_to_move = 0.2
+
+[node name="Attack_Hitbox" parent="Attack_Area" index="0"]
+shape = SubResource("RectangleShape2D_sda5e")

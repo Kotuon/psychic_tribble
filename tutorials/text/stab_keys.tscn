@@ -1,0 +1,124 @@
+[gd_scene load_steps=9 format=3 uid="uid://c5p1mvoyl17x1"]
+
+[ext_resource type="Texture2D" uid="uid://f0khb8d6y00s" path="res://assets/art/Prompts/Keyboard Prompts.png" id="1_kpfas"]
+[ext_resource type="Texture2D" uid="uid://dmrdhnmoiel63" path="res://assets/art/Prompts/XBOXone.png" id="2_subhh"]
+
+[sub_resource type="Animation" id="Animation_etavo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(306, 176, 17, 16)]
+}
+
+[sub_resource type="Animation" id="Animation_jq0ys"]
+resource_name = "click"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1e-05, 1e-05),
+"update": 0,
+"values": [Rect2(324, 178, 17, 14), Rect2(306, 161, 17, 14)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5jr5r"]
+_data = {
+"RESET": SubResource("Animation_etavo"),
+"click": SubResource("Animation_jq0ys")
+}
+
+[sub_resource type="Animation" id="Animation_k2t1t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(47.5, 1, 12, 12)]
+}
+
+[sub_resource type="Animation" id="Animation_q8mh3"]
+resource_name = "click"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1e-05, 1e-05),
+"update": 0,
+"values": [Rect2(72, 1, 11, 12), Rect2(84, 1, 11, 12)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rb7sb"]
+_data = {
+"RESET": SubResource("Animation_k2t1t"),
+"click": SubResource("Animation_q8mh3")
+}
+
+[node name="stab_keys" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-14, 0)
+texture = ExtResource("1_kpfas")
+region_enabled = true
+region_rect = Rect2(306, 176, 17, 16)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+autoplay = "click"
+libraries = {
+"": SubResource("AnimationLibrary_5jr5r")
+}
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(12, 0)
+texture = ExtResource("2_subhh")
+region_enabled = true
+region_rect = Rect2(47.5, 1, 12, 12)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D2"]
+autoplay = "click"
+libraries = {
+"": SubResource("AnimationLibrary_rb7sb")
+}
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -13.0
+offset_right = 21.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "/"
+horizontal_alignment = 1
+vertical_alignment = 1
