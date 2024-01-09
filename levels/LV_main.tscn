@@ -1,0 +1,188 @@
+[gd_scene load_steps=12 format=3 uid="uid://jgk5arowrp2t"]
+
+[ext_resource type="PackedScene" uid="uid://dapv32tmbt4nj" path="res://player/player.tscn" id="1_dvdgm"]
+[ext_resource type="PackedScene" uid="uid://drd5gnki01kge" path="res://objects/wall.tscn" id="2_1664b"]
+[ext_resource type="PackedScene" uid="uid://ct42ti53jtdon" path="res://objects/checkpoint.tscn" id="3_rph3g"]
+[ext_resource type="PackedScene" uid="uid://jix85le31wwy" path="res://objects/traps/moving_trap.tscn" id="4_1jlwb"]
+[ext_resource type="AudioStream" uid="uid://dkp42xwrgacp6" path="res://assets/audio/ambient/Fantasy_World_Loop_Ambience_Crystal_Maze_Full_Swirling_Ancient_Movement_Motion_LFO_Modulation_Cm.wav" id="5_7uvtb"]
+[ext_resource type="PackedScene" uid="uid://qmsxk36uoc1d" path="res://character/practice_character.tscn" id="6_e0tne"]
+[ext_resource type="PackedScene" uid="uid://duixhhhca8vru" path="res://tutorials/text/attack_keys.tscn" id="7_gwr5b"]
+[ext_resource type="PackedScene" uid="uid://dr0o3250imqw2" path="res://tutorials/text/dash_keys.tscn" id="8_j67ty"]
+[ext_resource type="PackedScene" uid="uid://c5p1mvoyl17x1" path="res://tutorials/text/stab_keys.tscn" id="9_7104e"]
+[ext_resource type="PackedScene" uid="uid://cqlnvsxtn6mro" path="res://enemies/slime.tscn" id="10_kk136"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_so8ly"]
+vertices = PackedVector2Array(512, -316, 508, 324, -504, 324, -504, -316)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-504, -316, -504, 324, 508, 324, 512, -316)])
+
+[node name="Node2D" type="Node2D"]
+
+[node name="player" parent="." instance=ExtResource("1_dvdgm")]
+position = Vector2(960, -4028)
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="wall" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(960, 1080)
+scale = Vector2(44, 4)
+
+[node name="wall2" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(560, 840)
+scale = Vector2(4, 20)
+
+[node name="wall3" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(1360, 840)
+scale = Vector2(4, 20)
+
+[node name="wall4" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(688, 528)
+rotation = 0.785398
+scale = Vector2(4, 19.8)
+
+[node name="wall5" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(1232, 528)
+rotation = -0.785398
+scale = Vector2(4, 19.8)
+
+[node name="wall6" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(816, -24)
+scale = Vector2(4, 44)
+
+[node name="wall7" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(1104, -24)
+scale = Vector2(4, 44)
+
+[node name="wall8" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(616, -704)
+scale = Vector2(4, 24)
+
+[node name="wall9" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(1304, -704)
+scale = Vector2(4, 24)
+
+[node name="wall10" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(1244, -424)
+scale = Vector2(10, 4)
+
+[node name="wall11" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(676, -424)
+scale = Vector2(10, 4)
+
+[node name="wall12" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(1244, -984)
+scale = Vector2(10, 4)
+
+[node name="wall13" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(676, -984)
+scale = Vector2(10, 4)
+
+[node name="wall14" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(816, -1664)
+scale = Vector2(4, 72)
+
+[node name="wall15" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(1104, -1664)
+scale = Vector2(4, 72)
+
+[node name="wall16" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(756, -2424)
+scale = Vector2(10, 4)
+
+[node name="wall24" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(656, -4344)
+scale = Vector2(20, 4)
+
+[node name="wall26" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(416, -4704)
+scale = Vector2(4, 40)
+
+[node name="wall27" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(1508, -4704)
+scale = Vector2(4, 40)
+
+[node name="wall28" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(960, -5064)
+scale = Vector2(52, 4)
+
+[node name="wall25" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(1268, -4344)
+scale = Vector2(20, 4)
+
+[node name="wall17" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(1164, -2424)
+scale = Vector2(10, 4)
+
+[node name="wall18" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(616, -2624)
+scale = Vector2(4, 24)
+
+[node name="wall19" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(1304, -2624)
+scale = Vector2(4, 24)
+
+[node name="wall20" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(756, -2824)
+scale = Vector2(10, 4)
+
+[node name="wall21" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(1168, -2824)
+scale = Vector2(10, 4)
+
+[node name="wall22" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(816, -3584)
+scale = Vector2(4, 72)
+
+[node name="wall23" parent="Walls" instance=ExtResource("2_1664b")]
+position = Vector2(1108, -3584)
+scale = Vector2(4, 72)
+
+[node name="Checkpoints" type="Node" parent="."]
+
+[node name="checkpoint" parent="Checkpoints" instance=ExtResource("3_rph3g")]
+position = Vector2(960, -1664)
+
+[node name="checkpoint2" parent="Checkpoints" instance=ExtResource("3_rph3g")]
+position = Vector2(960, -4236)
+
+[node name="Hazards" type="Node" parent="."]
+
+[node name="moving_trap" parent="Hazards" instance=ExtResource("4_1jlwb")]
+position = Vector2(836, -2112)
+scale = Vector2(2, 8)
+distance_to_move = 248.0
+time_to_move = 0.6
+
+[node name="Ambient_AudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_7uvtb")
+autoplay = true
+bus = &"Ambient"
+
+[node name="Practice_Characters" type="Node" parent="."]
+
+[node name="practice_character" parent="Practice_Characters" instance=ExtResource("6_e0tne")]
+position = Vector2(960, -608)
+
+[node name="practice_character2" parent="Practice_Characters" instance=ExtResource("6_e0tne")]
+position = Vector2(960, -2560)
+
+[node name="Tutorial_Text" type="Node" parent="."]
+
+[node name="attack_keys" parent="Tutorial_Text" instance=ExtResource("7_gwr5b")]
+position = Vector2(960, -832)
+scale = Vector2(5, 5)
+
+[node name="dash_keys" parent="Tutorial_Text" instance=ExtResource("8_j67ty")]
+position = Vector2(1320, -2112)
+scale = Vector2(5, 5)
+
+[node name="stab_keys" parent="Tutorial_Text" instance=ExtResource("9_7104e")]
+position = Vector2(960, -2720)
+scale = Vector2(5, 5)
+
+[node name="slime" parent="." instance=ExtResource("10_kk136")]
+position = Vector2(688, -4844)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(960, -4708)
+navigation_polygon = SubResource("NavigationPolygon_so8ly")

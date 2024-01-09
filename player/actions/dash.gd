@@ -32,6 +32,8 @@ func _process(delta: float) -> void:
 func start() -> bool:
     if (!super.start()):
         return false
+        
+    print("Start dash")
 
     dash_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
     if dash_direction.length_squared() == 0.0:
@@ -53,7 +55,6 @@ func end() -> void:
     parent.can_walk = true
     is_running = false
     parent.can_take_damage = true
-    #parent.velocity = Vector2.ZERO
     parent.current_walk_speed = parent.current_walk_speed / 2.0
 
     if parent.in_hazard:

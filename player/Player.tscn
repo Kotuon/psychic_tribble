@@ -25,7 +25,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ny1lx"]
 radius = 15.0
-height = 64.0
+height = 32.0
 
 [node name="player" instance=ExtResource("1_t6k54")]
 z_index = 1
@@ -35,6 +35,7 @@ footstep_sounds = Array[AudioStream]([ExtResource("3_733wa"), ExtResource("4_dpn
 hit_sounds = Array[AudioStream]([ExtResource("13_h4y4f"), ExtResource("14_8i635")])
 
 [node name="Character_Hitbox" parent="." index="0"]
+position = Vector2(0, 21)
 shape = SubResource("CapsuleShape2D_ny1lx")
 
 [node name="Sprite2D" parent="." index="1"]
@@ -61,11 +62,13 @@ dash_distance = 150
 sound_effects = Array[AudioStream]([ExtResource("18_0tbli")])
 
 [node name="Slash" parent="." index="8" instance=ExtResource("21_0xrws")]
+attack_damage = 10
 cooldown = 0.05
 sound_effects = Array[AudioStream]([ExtResource("19_kvb2n")])
 
 [node name="Stab" parent="." index="9" instance=ExtResource("21_i5qo7")]
-attack_damage = 2
+time_to_stun = 0.0
+attack_damage = 10
 can_queue = true
 cooldown = 0.5
 sound_effects = Array[AudioStream]([ExtResource("22_ww8fo")])

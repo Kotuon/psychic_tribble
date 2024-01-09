@@ -36,6 +36,10 @@ var flicker_counter = 0.0
 var flicker_amount = 4
 var times_flickered = 0
 
+# Stun
+var is_stunned = false
+var time_to_be_stunned : float
+
 #Abilities
 var ability_list : Array[Ability]
 var current_action = -1
@@ -55,6 +59,10 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
     flicker(delta)
+    if is_stunned:
+        time_to_be_stunned -= delta
+        if time_to_be_stunned <= 0.0:
+            is_stunned = false
 
 func update_current_walk_speed(delta, direction : Vector2):
     if direction.length_squared() > 0.0:
@@ -102,7 +110,7 @@ func get_animation_direction(direction : Vector2) -> StringName:
 
     return animation_direction
 
-func walk(delta: float, direction: Vector2) -> void:
+func walk(delta: float, direction: Vector2, play_sound: bool = true) -> void:
     if direction.length_squared() > 0.0:
         last_non_zero_input = direction
 
@@ -121,14 +129,15 @@ func walk(delta: float, direction: Vector2) -> void:
     if current_walk_speed == 0.0:
         animation_player.play(get_animation_direction(last_non_zero_input) + "_idle")
     else:
-        play_footstep_sound()
+        if play_sound:
+            play_footstep_sound()
         if can_run && current_walk_speed > run_cutoff:
             animation_player.play(animation_direction + "_run")
         else:
             animation_player.play(animation_direction + "_walk")
     move_and_slide()
 
-func play_footstep_sound():
+func play_footstep_sound() -> void:
     if footstep_audioplayer.is_playing(): 
         return
 
@@ -140,9 +149,6 @@ func play_footstep_sound():
     footstep_audioplayer.play()
 
 func play_hit_sound():
-    #if hit_audioplayer.is_playing(): 
-    #    return
-
     if hit_sounds.size() == 0:
         return
 
@@ -187,6 +193,28 @@ func take_damage(damage: int) -> void:
     if health <= 0:
         kill()
 
-func change_action(new_action: int):
-    if ability_list[new_action].start():
-        current_action = new_action
+func change_action(new_action: int) -> bool:
+    if is_stunned:
+        return false
+
+    if !ability_list[new_action].can_change_action():
+        return false
+
+    if current_action != new_action && ability_list[current_action].is_running:
+        ability_list[current_action].end()
+    ability_list[new_action].start()
+    current_action = new_action
+
+    return true
+
+func stun(time_stunned: float):
+    ability_list[current_action].end()
+    current_action = -1
+    is_stunned = true
+    time_to_be_stunned = time_stunned
+
+    var this_text = preload("res://objects/floating_text.tscn").instantiate()
+    get_parent().add_child(this_text)
+    this_text.current_velocity = Vector2(0,-200)
+    this_text.position = position - Vector2(0,50)
+    this_text.get_node("Label").text = "Stunned"

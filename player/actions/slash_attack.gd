@@ -1,11 +1,13 @@
 extends Attack
 
+var original_damage : int
 var attack_number = 0
 var is_combo = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     super._ready()
+    original_damage = attack_damage
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -38,6 +40,7 @@ func start() -> bool:
 func end() -> void:
     if attack_number == 0 && is_combo:
         attack_number += 1
+        attack_damage = original_damage * 2
 
         hit_enemies.clear()
         check_overlapping()
@@ -47,6 +50,7 @@ func end() -> void:
         parent.animation_player.play(direction + "_slash_second")
         play_sound(0.3)
     else:
+        attack_damage = original_damage
         is_running = false
         parent.can_walk = true
         attack_number = 0

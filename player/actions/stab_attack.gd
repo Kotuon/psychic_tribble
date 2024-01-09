@@ -2,6 +2,7 @@ extends Attack
 
 @export var distance = 100
 @export var time_to_move = 0.2
+@export var time_to_stun = 0.0
 var can_move = true
 
 # Called when the node enters the scene tree for the first time.
@@ -45,8 +46,11 @@ func end() -> void:
     is_running = false
     parent.can_walk = true
     attack_hitbox.disabled = true
-    #parent.current_walk_speed = 0
     super.end()
 
 func stop_movement() -> void:
     can_move = false
+
+func deal_damage(body: Node2D) -> void:
+    super.deal_damage(body)
+    body.stun(0.0)

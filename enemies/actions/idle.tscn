@@ -5,4 +5,4 @@
 
 [node name="idle" instance=ExtResource("1_ytwf8")]
 script = ExtResource("2_41asb")
-idle_time = 5.0
+cooldown = 0.0

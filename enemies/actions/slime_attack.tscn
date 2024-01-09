@@ -5,3 +5,5 @@
 
 [node name="slime_attack" instance=ExtResource("1_8t70j")]
 script = ExtResource("2_en2fy")
+can_override = true
+can_queue = true

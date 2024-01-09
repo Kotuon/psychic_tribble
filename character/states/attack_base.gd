@@ -47,12 +47,15 @@ func check_overlapping():
     for hit in overlapped_hits:
         if hit is CharacterBase && hit != parent:
             hit_enemies.push_back(hit)
-            hit.take_damage(attack_damage)
+            deal_damage(hit)
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
     if body is CharacterBase && body != parent:
         hit_enemies.push_back(body)
-        body.take_damage(attack_damage)
+        deal_damage(body)
+        
+func deal_damage(body: Node2D) -> void:
+    body.take_damage(attack_damage)
 
 func update_hitbox_position(direction: String) -> void:
     match direction:

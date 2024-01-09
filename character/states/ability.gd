@@ -18,7 +18,8 @@ var on_cooldown = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    cooldown_timer.wait_time = cooldown
+    if cooldown > 0.0:
+        cooldown_timer.wait_time = cooldown
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -27,21 +28,28 @@ func _process(_delta: float) -> void:
 func _input(_event: InputEvent) -> void:
     pass
 
-func start() -> bool:
+func can_change_action() -> bool:
     if on_cooldown:
+        #print(parent.name + ": " + name + " is on cooldown.")
         return false
 
     if parent.current_action != -1 && parent.current_action != action_id:
-        if parent.ability_list[parent.current_action].is_running:
+        if parent.ability_list[parent.current_action].is_running && !can_override:
             if can_queue:
+               # print(parent.name + ": " + name + " is queued.")
                 parent.queued_action = action_id
             return false
 
     return true
 
+func start() -> bool:
+    return true
+
 func end() -> void:
-    on_cooldown = true
-    cooldown_timer.start()
+    if cooldown > 0.0:
+        on_cooldown = true
+        cooldown_timer.start()
+
     if parent.queued_action != -1:
         parent.change_action(parent.queued_action)
         parent.queued_action = -1
