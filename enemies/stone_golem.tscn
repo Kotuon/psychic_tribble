@@ -1,0 +1,187 @@
+[gd_scene load_steps=13 format=3 uid="uid://dnh1vy206kekx"]
+
+[ext_resource type="PackedScene" uid="uid://ckp8pbos4m2tb" path="res://enemies/enemy.tscn" id="1_tpu2m"]
+[ext_resource type="Script" path="res://enemies/stone_golem.gd" id="2_0ycfc"]
+[ext_resource type="Texture2D" uid="uid://dasvwtpvnpbhh" path="res://assets/art/Stone_golem/Stone-golem v2-all animations-224x192.png" id="3_gg0sh"]
+[ext_resource type="AudioStream" uid="uid://cbnu33mbh86o8" path="res://assets/audio/spawn/Fantasy_Game_Magic_Earth_Long_Cast_Spell_A.wav" id="4_n3dxx"]
+
+[sub_resource type="Animation" id="Animation_icx16"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_m3jaf"]
+resource_name = "attack"
+length = 2.55
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2, 1.35, 1.5, 1.65, 1.8, 1.95, 2.1, 2.25, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50]
+}
+
+[sub_resource type="Animation" id="Animation_0ioqs"]
+resource_name = "death"
+length = 1.95
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2, 1.35, 1.5, 1.65, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80]
+}
+
+[sub_resource type="Animation" id="Animation_m0mfp"]
+resource_name = "hit"
+length = 1.8
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2, 1.35, 1.5, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62]
+}
+
+[sub_resource type="Animation" id="Animation_2ph1s"]
+resource_name = "idle"
+length = 1.2
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_8slym"]
+resource_name = "spawn"
+length = 2.1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2, 1.35, 1.5, 1.65, 1.8, 1.95),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [80, 79, 78, 77, 76, 75, 74, 73, 72, 71, 70, 69, 68, 52]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:has_spawned")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shake_player_camera"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_qdb65"]
+resource_name = "walk"
+length = 1.2
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [17, 18, 19, 20, 21, 22, 23, 24]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6wywk"]
+_data = {
+"RESET": SubResource("Animation_icx16"),
+"attack": SubResource("Animation_m3jaf"),
+"death": SubResource("Animation_0ioqs"),
+"hit": SubResource("Animation_m0mfp"),
+"idle": SubResource("Animation_2ph1s"),
+"spawn": SubResource("Animation_8slym"),
+"walk": SubResource("Animation_qdb65")
+}
+
+[node name="stone_golem" instance=ExtResource("1_tpu2m")]
+z_index = 1
+y_sort_enabled = true
+script = ExtResource("2_0ycfc")
+has_spawned = true
+health = 300
+
+[node name="Character_Hitbox" parent="." index="0"]
+visible = false
+position = Vector2(0, -0.5)
+
+[node name="Sprite2D" parent="." index="1"]
+y_sort_enabled = true
+scale = Vector2(3, 3)
+texture = ExtResource("3_gg0sh")
+hframes = 17
+vframes = 5
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_6wywk")
+}
+
+[node name="Spawn_AudioPlayer" type="AudioStreamPlayer2D" parent="." index="5"]
+stream = ExtResource("4_n3dxx")

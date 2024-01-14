@@ -21,7 +21,7 @@ func start() -> bool:
         return false
 
     attack_hitbox.disabled = false
-    if is_running && attack_number == 0:
+    if is_running:
         is_combo = true
     elif !is_running && attack_number == 0:
         parent.can_walk = false
@@ -49,12 +49,16 @@ func end() -> void:
         update_hitbox_position(direction)
         parent.animation_player.play(direction + "_slash_second")
         play_sound(0.3)
-    else:
-        attack_damage = original_damage
-        is_running = false
-        parent.can_walk = true
-        attack_number = 0
-        attack_hitbox.disabled = true
-        parent.current_walk_speed = 0
         is_combo = false
-        super.end()
+        return
+
+    if attack_number == 1 && is_combo:
+        parent.queued_action = parent.stab.action_id
+
+    attack_damage = original_damage
+    is_running = false
+    parent.can_walk = true
+    attack_number = 0
+    attack_hitbox.disabled = true
+    parent.current_walk_speed = 0
+    super.end()

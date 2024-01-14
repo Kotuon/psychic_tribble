@@ -3,5 +3,6 @@
 [ext_resource type="Script" path="res://player/actions/dash_trail.gd" id="1_4ofqf"]
 
 [node name="Dash_Trail" type="Sprite2D"]
-scale = Vector2(3, 3)
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_4ofqf")

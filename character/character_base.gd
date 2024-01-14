@@ -3,6 +3,7 @@ class_name CharacterBase
 
 # Health
 @export var health = 3
+var has_died = false
 var can_take_damage = true
 var in_hazard = false
 
@@ -82,6 +83,7 @@ func get_animation_direction(direction : Vector2) -> StringName:
 
     if direction.y > 0.1:
         if abs(direction.x) < 0.1:
+            sprite.flip_h = false
             animation_direction = "front"
         else:
             if direction.x > 0.1:
@@ -92,6 +94,7 @@ func get_animation_direction(direction : Vector2) -> StringName:
                 animation_direction = "front_side"
     elif direction.y < -0.1:
         if abs(direction.x) < 0.1:
+            sprite.flip_h = false
             animation_direction = "back"
         else:
             if direction.x > 0.1:
@@ -173,8 +176,9 @@ func flicker(delta: float) -> void:
         if times_flickered >= flicker_amount:
             is_flickering = false
 
-func kill():
+func kill() -> void:
     print(name + " has died.")
+    has_died = true
 
 func take_damage(damage: int) -> void:
     health -= damage
@@ -208,6 +212,9 @@ func change_action(new_action: int) -> bool:
     return true
 
 func stun(time_stunned: float):
+    if ability_list.size() <= 0:
+        return
+    
     ability_list[current_action].end()
     current_action = -1
     is_stunned = true

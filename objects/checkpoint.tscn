@@ -1,11 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://ct42ti53jtdon"]
+[gd_scene load_steps=12 format=3 uid="uid://ct42ti53jtdon"]
 
 [ext_resource type="Script" path="res://objects/checkpoint.gd" id="1_u5py1"]
 [ext_resource type="AudioStream" uid="uid://r8pnmokye0e2" path="res://assets/audio/items/Fantasy_Game_Item_Collect_Magic_G.wav" id="2_l3jao"]
 [ext_resource type="Texture2D" uid="uid://cuv1yevfk1ygl" path="res://assets/art/Environment/Props/animated/golden chalice 64x64-no spirits-less shiny.png" id="3_0jd65"]
 [ext_resource type="Texture2D" uid="uid://dto8uw30470so" path="res://assets/art/Environment/Props/animated/golden chalice 64x64-spirits-less shiny.png" id="4_syxxy"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_16yg6"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_e67gw"]
+radius = 25.0
 
 [sub_resource type="Gradient" id="Gradient_8nm1c"]
 offsets = PackedFloat32Array(0, 0.61708, 1)
@@ -211,15 +212,19 @@ _data = {
 "set": SubResource("Animation_1tvk4")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r3nko"]
+height = 40.0
+
 [node name="checkpoint" type="Node2D"]
-z_index = -1
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_u5py1")
 
 [node name="Area2D" type="Area2D" parent="."]
 scale = Vector2(3, 3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_16yg6")
+shape = SubResource("CircleShape2D_e67gw")
 
 [node name="Effect" type="CPUParticles2D" parent="."]
 emitting = false
@@ -252,5 +257,12 @@ root_node = NodePath("../Sprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_oytcg")
 }
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1, 18)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_r3nko")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

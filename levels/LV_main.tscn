@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://jgk5arowrp2t"]
+[gd_scene load_steps=11 format=3 uid="uid://jgk5arowrp2t"]
 
 [ext_resource type="PackedScene" uid="uid://dapv32tmbt4nj" path="res://player/player.tscn" id="1_dvdgm"]
 [ext_resource type="PackedScene" uid="uid://drd5gnki01kge" path="res://objects/wall.tscn" id="2_1664b"]
 [ext_resource type="PackedScene" uid="uid://ct42ti53jtdon" path="res://objects/checkpoint.tscn" id="3_rph3g"]
 [ext_resource type="PackedScene" uid="uid://jix85le31wwy" path="res://objects/traps/moving_trap.tscn" id="4_1jlwb"]
-[ext_resource type="AudioStream" uid="uid://dkp42xwrgacp6" path="res://assets/audio/ambient/Fantasy_World_Loop_Ambience_Crystal_Maze_Full_Swirling_Ancient_Movement_Motion_LFO_Modulation_Cm.wav" id="5_7uvtb"]
 [ext_resource type="PackedScene" uid="uid://qmsxk36uoc1d" path="res://character/practice_character.tscn" id="6_e0tne"]
 [ext_resource type="PackedScene" uid="uid://duixhhhca8vru" path="res://tutorials/text/attack_keys.tscn" id="7_gwr5b"]
 [ext_resource type="PackedScene" uid="uid://dr0o3250imqw2" path="res://tutorials/text/dash_keys.tscn" id="8_j67ty"]
@@ -152,11 +151,6 @@ position = Vector2(836, -2112)
 scale = Vector2(2, 8)
 distance_to_move = 248.0
 time_to_move = 0.6
-
-[node name="Ambient_AudioPlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_7uvtb")
-autoplay = true
-bus = &"Ambient"
 
 [node name="Practice_Characters" type="Node" parent="."]
 

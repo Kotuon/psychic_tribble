@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://d05jipos5envu"]
+
+[ext_resource type="Texture2D" uid="uid://s1rb1s1gciy7" path="res://assets/art/Environment/Props/animated/portal.png" id="1_ikd12"]
+
+[node name="portal" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+z_index = 2
+position = Vector2(0, 24)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-76, -24, -112, 40, -20, 56, -20, 0, 20, 0, 24, 56, 108, 56, 112, 36, 76, -24, 0, -16)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+texture = ExtResource("1_ikd12")

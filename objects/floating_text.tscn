@@ -13,6 +13,8 @@ outline_color = Color(0, 0, 0, 1)
 script = ExtResource("1_rbkw6")
 
 [node name="Label" type="Label" parent="."]
+z_index = 100
+y_sort_enabled = true
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

@@ -25,4 +25,4 @@ func _process(delta: float) -> void:
     distance_from_player = position.distance_to(player.position)
 
 func kill():
-    queue_free()
+    super.kill()

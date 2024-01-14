@@ -61,3 +61,7 @@ func get_animation_direction(direction : Vector2) -> StringName:
             animation_direction = "side"
 
     return animation_direction
+
+func kill():
+    super.kill()
+    queue_free()
