@@ -11,8 +11,9 @@ config_version=5
 [application]
 
 config/name="Psychic Tribble"
-run/main_scene="res://levels/LV_tm2.tscn"
+run/main_scene="res://levels/lv_tm4.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
+boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
 config/icon="res://icon.svg"
 
 [display]

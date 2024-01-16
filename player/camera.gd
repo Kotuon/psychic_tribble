@@ -12,8 +12,9 @@ var trauma_pwr := 2 #Trauma exponent. Use [2,3]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    randomize()
-    noise.seed = randi()
+    pass
+    #randomize()
+    #noise.seed = randi()
 
 func add_trauma(amount : float):
     trauma = min(trauma + amount, 1.0)

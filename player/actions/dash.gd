@@ -32,8 +32,6 @@ func _process(delta: float) -> void:
 func start() -> bool:
     if (!super.start()):
         return false
-        
-    print("Start dash")
 
     dash_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
     if dash_direction.length_squared() == 0.0:

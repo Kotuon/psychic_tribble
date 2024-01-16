@@ -41,6 +41,7 @@ height = 32.0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8qra6"]
 noise_type = 3
+seed = 4145
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jligh"]
 bg_color = Color(0.0941176, 0.0941176, 0.0941176, 1)
@@ -109,7 +110,6 @@ cooldown = 0.05
 sound_effects = Array[AudioStream]([ExtResource("19_kvb2n")])
 
 [node name="Stab" parent="." index="11" instance=ExtResource("21_i5qo7")]
-time_to_stun = 0.0
 attack_damage = 10
 can_queue = true
 cooldown = 0.5
@@ -117,6 +117,7 @@ sound_effects = Array[AudioStream]([ExtResource("22_ww8fo")])
 
 [node name="PauseMenu" type="CanvasLayer" parent="." index="12"]
 process_mode = 2
+visible = false
 
 [node name="Menu" type="ColorRect" parent="PauseMenu" index="0"]
 anchors_preset = 15

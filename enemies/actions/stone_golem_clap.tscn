@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://u5resou4a16m"]
+
+[ext_resource type="PackedScene" uid="uid://bboby1p53hu7k" path="res://character/states/attack_base.tscn" id="1_hi3j4"]
+[ext_resource type="Script" path="res://enemies/actions/stone_golem_clap.gd" id="2_0ietk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nvy5u"]
+size = Vector2(150, 170)
+
+[node name="stone_golem_clap" instance=ExtResource("1_hi3j4")]
+script = ExtResource("2_0ietk")
+
+[node name="Attack_Hitbox" parent="Attack_Area" index="0"]
+shape = SubResource("RectangleShape2D_nvy5u")

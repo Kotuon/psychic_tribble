@@ -50,6 +50,8 @@ func end() -> void:
         on_cooldown = true
         cooldown_timer.start()
 
+    parent.current_action = -1
+
     if parent.queued_action != -1:
         parent.change_action(parent.queued_action)
         parent.queued_action = -1

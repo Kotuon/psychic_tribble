@@ -10,6 +10,7 @@ size = Vector2(60, 120)
 script = ExtResource("2_ex7u7")
 distance = 100
 time_to_move = 0.2
+time_to_stun = 0.0
 
 [node name="Attack_Hitbox" parent="Attack_Area" index="0"]
 shape = SubResource("RectangleShape2D_sda5e")
