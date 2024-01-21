@@ -1,13 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://u5resou4a16m"]
+[gd_scene load_steps=5 format=3 uid="uid://u5resou4a16m"]
 
 [ext_resource type="PackedScene" uid="uid://bboby1p53hu7k" path="res://character/states/attack_base.tscn" id="1_hi3j4"]
 [ext_resource type="Script" path="res://enemies/actions/stone_golem_clap.gd" id="2_0ietk"]
+[ext_resource type="AudioStream" uid="uid://4s5104gmrk30" path="res://assets/audio/attack/Fantasy_Game_Magic_Meteor_Spell_Hit_B.wav" id="3_y6j73"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nvy5u"]
-size = Vector2(150, 170)
+size = Vector2(350, 350)
 
 [node name="stone_golem_clap" instance=ExtResource("1_hi3j4")]
 script = ExtResource("2_0ietk")
+
+[node name="Ability_AudioPlayer" parent="." index="0"]
+stream = ExtResource("3_y6j73")
 
 [node name="Attack_Hitbox" parent="Attack_Area" index="0"]
 shape = SubResource("RectangleShape2D_nvy5u")

@@ -54,9 +54,16 @@ z_index = 1
 y_sort_enabled = true
 floor_stop_on_slope = false
 script = ExtResource("2_yt7a2")
-turn_speed = 350
+health = null
+max_walk_speed = null
+walk_acceleration = null
+brake_speed = null
+turn_speed = null
+run_cutoff = null
+can_run = null
 footstep_sounds = Array[AudioStream]([ExtResource("3_733wa"), ExtResource("4_dpnyj"), ExtResource("5_0u6x3"), ExtResource("6_q2w77"), ExtResource("7_m34f0"), ExtResource("8_cd0xu"), ExtResource("9_a6xal"), ExtResource("10_n2w7u"), ExtResource("11_gkasv"), ExtResource("12_jv3vn")])
 hit_sounds = Array[AudioStream]([ExtResource("13_h4y4f"), ExtResource("14_8i635")])
+total_flicker_time = null
 
 [node name="Ambient_AudioPlayer" type="AudioStreamPlayer2D" parent="." index="0"]
 scale = Vector2(9, 9)
@@ -90,9 +97,6 @@ root_node = NodePath("../Sprite2D")
 libraries = {
 "": ExtResource("3_tau3u")
 }
-
-[node name="Hit_AudioPlayer" parent="." index="6"]
-volume_db = -5.0
 
 [node name="AudioListener2D" type="AudioListener2D" parent="." index="7"]
 current = true

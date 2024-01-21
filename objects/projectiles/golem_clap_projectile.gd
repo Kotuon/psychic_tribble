@@ -14,6 +14,7 @@ func _process(delta: float) -> void:
     super._process(delta)
 
     scale.y += (scale_factor * delta)
+    modulate.a = curr_lifetime / lifetime
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:

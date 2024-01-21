@@ -59,6 +59,7 @@ func kill():
     if most_recent_checkpoint:
         print("Start at checkpoint.")
         position = most_recent_checkpoint.position
+        curr_health = max_health
     else:
         print("No checkpoint.")
         get_tree().reload_current_scene()

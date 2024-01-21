@@ -14,10 +14,12 @@
 radius = 8.0
 
 [node name="slime" instance=ExtResource("1_g00bv")]
+z_index = 1
+y_sort_enabled = true
 scale = Vector2(4, 4)
 script = ExtResource("2_nha11")
 attack_distance = 200
-health = 40
+look_for_player = true
 max_walk_speed = 300
 run_cutoff = 300
 can_run = false

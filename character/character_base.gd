@@ -2,7 +2,8 @@ extends CharacterBody2D
 class_name CharacterBase
 
 # Health
-@export var health = 3
+@export var max_health : int = 3
+var curr_health : int
 var has_died = false
 var can_take_damage = true
 var in_hazard = false
@@ -50,6 +51,8 @@ var queued_action = -1
 var rng = RandomNumberGenerator.new()
 
 func _ready() -> void:
+    curr_health = max_health
+
     time_to_flicker = total_flicker_time / flicker_amount
 
     for child in get_children():
@@ -72,7 +75,7 @@ func update_current_walk_speed(delta, direction : Vector2):
         else:
             current_walk_speed = max_walk_speed
     else:
-        if current_walk_speed > 0.0:
+        if current_walk_speed > 0.001:
             current_walk_speed -= clamp(brake_speed * delta, 0.0, max_walk_speed)
         else:
             current_walk_speed = 0.0
@@ -128,6 +131,8 @@ func walk(delta: float, direction: Vector2, play_sound: bool = true) -> void:
     velocity = (velocity + (direction * turn_speed)).normalized() * current_walk_speed
 
     var animation_direction = get_animation_direction(velocity)
+    if current_walk_speed < 0.01:
+        animation_direction = get_animation_direction(last_non_zero_input)
 
     if current_walk_speed == 0.0:
         animation_player.play(get_animation_direction(last_non_zero_input) + "_idle")
@@ -181,7 +186,10 @@ func kill() -> void:
     has_died = true
 
 func take_damage(damage: int) -> void:
-    health -= damage
+    if !can_take_damage:
+        return
+
+    curr_health -= damage
 
     var this_text = preload("res://objects/floating_text.tscn").instantiate()
     get_parent().add_child(this_text)
@@ -194,7 +202,7 @@ func take_damage(damage: int) -> void:
     flicker_counter = 0.0
     times_flickered = 0
 
-    if health <= 0:
+    if curr_health <= 0:
         kill()
 
 func change_action(new_action: int) -> bool:

@@ -8,7 +8,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
     super._process(delta)
     if is_running:
-        parent.walk(delta, (parent.next_position - parent.position), false)
+        parent.walk(delta, (parent.next_position - parent.global_position).normalized(), false)
 
 func start() -> bool:
     if (!super.start()):

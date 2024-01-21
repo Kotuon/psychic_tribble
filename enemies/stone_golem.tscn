@@ -1,10 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://dnh1vy206kekx"]
+[gd_scene load_steps=18 format=3 uid="uid://dnh1vy206kekx"]
 
 [ext_resource type="PackedScene" uid="uid://ckp8pbos4m2tb" path="res://enemies/enemy.tscn" id="1_tpu2m"]
 [ext_resource type="Script" path="res://enemies/stone_golem.gd" id="2_0ycfc"]
 [ext_resource type="Texture2D" uid="uid://dasvwtpvnpbhh" path="res://assets/art/Stone_golem/Stone-golem v2-all animations-224x192.png" id="3_gg0sh"]
 [ext_resource type="AudioStream" uid="uid://cbnu33mbh86o8" path="res://assets/audio/spawn/Fantasy_Game_Magic_Earth_Long_Cast_Spell_A.wav" id="4_n3dxx"]
 [ext_resource type="PackedScene" uid="uid://u5resou4a16m" path="res://enemies/actions/stone_golem_clap.tscn" id="5_6v2bx"]
+[ext_resource type="PackedScene" uid="uid://dfa4x1vdn6ddq" path="res://enemies/actions/stomp_attack.tscn" id="6_4r3ok"]
+[ext_resource type="PackedScene" uid="uid://dp5nl7vmwkymq" path="res://enemies/actions/chase.tscn" id="7_j2nfn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_06v5d"]
+size = Vector2(205, 204)
 
 [sub_resource type="Animation" id="Animation_icx16"]
 length = 0.001
@@ -44,15 +49,33 @@ tracks/1/path = NodePath("Attack_Clap")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(1.35, 2.55),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 1.2, 1.35, 2.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
+"args": [1.8],
+"method": &"play_ability_audio"
+}, {
+"args": [],
+"method": &"check_overlapping"
+}, {
 "args": [],
 "method": &"spawn_projectile"
 }, {
 "args": [],
 "method": &"end"
 }]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:can_be_staggered")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.55),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_0ioqs"]
@@ -152,7 +175,8 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_ae4b1"]
 resource_name = "stomp"
-length = 0.8
+length = 0.55
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -164,6 +188,52 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [17, 18]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Attack_Stomp")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4, 0.55),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"check_overlapping"
+}, {
+"args": [],
+"method": &"end"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Attack_Stomp")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [1.53],
+"method": &"play_ability_audio"
+}, {
+"args": [],
+"method": &"trigger_shader"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:can_be_staggered")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.55),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_qdb65"]
@@ -200,6 +270,32 @@ tracks/1/keys = {
 "method": &"shake_player_camera"
 }]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.75, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"unfreeze_movement"
+}, {
+"args": [],
+"method": &"freeze_movement"
+}, {
+"args": [],
+"method": &"unfreeze_movement"
+}, {
+"args": [],
+"method": &"freeze_movement"
+}, {
+"args": [],
+"method": &"unfreeze_movement"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6wywk"]
 _data = {
@@ -213,25 +309,28 @@ _data = {
 "walk": SubResource("Animation_qdb65")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_6k0op"]
-radius = 45.3
-
 [node name="stone_golem" instance=ExtResource("1_tpu2m")]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("2_0ycfc")
+can_be_staggered = true
+time_to_ignore_hits = 5.0
 has_spawned = true
-health = 300
+look_for_player = true
+max_health = 300
+max_walk_speed = 200
+can_run = false
 
 [node name="Character_Hitbox" parent="." index="0"]
 visible = false
-position = Vector2(0, -0.5)
+z_index = 3
+position = Vector2(0.5, -15)
+shape = SubResource("RectangleShape2D_06v5d")
 
 [node name="Sprite2D" parent="." index="1"]
 y_sort_enabled = true
 scale = Vector2(3, 3)
 texture = ExtResource("3_gg0sh")
-flip_h = true
 hframes = 17
 vframes = 5
 
@@ -243,11 +342,23 @@ libraries = {
 [node name="Spawn_AudioPlayer" type="AudioStreamPlayer2D" parent="." index="5"]
 stream = ExtResource("4_n3dxx")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." index="6"]
-visible = false
+[node name="Attack_Clap" parent="." index="6" instance=ExtResource("5_6v2bx")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
-position = Vector2(-9, 47)
-shape = SubResource("CircleShape2D_6k0op")
+[node name="Attack_Stomp" parent="." index="7" instance=ExtResource("6_4r3ok")]
+y_sort_enabled = true
+position = Vector2(0, -2)
 
-[node name="Attack_Clap" parent="." index="7" instance=ExtResource("5_6v2bx")]
+[node name="Chase" parent="." index="8" instance=ExtResource("7_j2nfn")]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="9"]
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+debug_path_custom_point_size = 8.0
+
+[node name="StaggerTimer" type="Timer" parent="." index="10"]
+
+[node name="WaitTimer" type="Timer" parent="." index="11"]
+wait_time = 2.0
+
+[connection signal="timeout" from="StaggerTimer" to="." method="_on_stagger_timer_timeout"]
+[connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]
