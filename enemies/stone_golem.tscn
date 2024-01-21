@@ -313,6 +313,8 @@ _data = {
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("2_0ycfc")
+wait_min = 0.25
+wait_max = 2.5
 can_be_staggered = true
 time_to_ignore_hits = 5.0
 has_spawned = true
@@ -351,7 +353,6 @@ position = Vector2(0, -2)
 [node name="Chase" parent="." index="8" instance=ExtResource("7_j2nfn")]
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="9"]
-debug_enabled = true
 debug_path_custom_color = Color(1, 0, 0, 1)
 debug_path_custom_point_size = 8.0
 

@@ -16,7 +16,6 @@
 [ext_resource type="AudioStream" uid="uid://vs8ssnu2hgu4" path="res://assets/audio/footsteps/Fantasy_Game_Footstep_Stone_Light_J.wav" id="12_jv3vn"]
 [ext_resource type="AudioStream" uid="uid://c1k8fjcq6aa83" path="res://assets/audio/attack/Fantasy_Game_Attack_Cloth_Armor_Hit_A.wav" id="13_h4y4f"]
 [ext_resource type="AudioStream" uid="uid://bu1016c8u40wj" path="res://assets/audio/attack/Fantasy_Game_Attack_Cloth_Armor_Hit_B.wav" id="14_8i635"]
-[ext_resource type="Shader" path="res://player/outline.gdshader" id="15_3it6f"]
 [ext_resource type="AudioStream" uid="uid://dkp42xwrgacp6" path="res://assets/audio/ambient/Fantasy_World_Loop_Ambience_Crystal_Maze_Full_Swirling_Ancient_Movement_Motion_LFO_Modulation_Cm.wav" id="15_j2762"]
 [ext_resource type="Texture2D" uid="uid://dxof852yd2cmw" path="res://assets/art/Red_Sprite/BackSIde COnesecutiveSlash.png" id="15_oxtuy"]
 [ext_resource type="AudioStream" uid="uid://v2gjo7fbt75r" path="res://assets/audio/abilities/Fantasy_Game_Item_Collect_Magic_A.wav" id="18_0tbli"]
@@ -27,14 +26,6 @@
 [ext_resource type="AudioStream" uid="uid://berdu6xfribhq" path="res://assets/audio/attack/Fantasy_Game_Attack_Skill_Knife_Throw_B.wav" id="22_ww8fo"]
 [ext_resource type="FontFile" uid="uid://cnv5trghp6um2" path="res://assets/fonts/OpenDyslexic-Regular.otf" id="26_2gaor"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mpn87"]
-shader = ExtResource("15_3it6f")
-shader_parameter/color = Color(0, 0, 0, 0.74902)
-shader_parameter/width = 1.0
-shader_parameter/pattern = 0
-shader_parameter/inside = true
-shader_parameter/add_margins = false
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ny1lx"]
 radius = 15.0
 height = 32.0
@@ -42,6 +33,12 @@ height = 32.0
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8qra6"]
 noise_type = 3
 seed = 4145
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bthml"]
+bg_color = Color(0.2, 0.2, 0.2, 0.239216)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rrho8"]
+bg_color = Color(0.65098, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jligh"]
 bg_color = Color(0.0941176, 0.0941176, 0.0941176, 1)
@@ -65,18 +62,11 @@ autoplay = true
 max_distance = 20000.0
 bus = &"Ambient"
 
-[node name="Mask" type="Sprite2D" parent="." index="1"]
-visible = false
-z_index = 100
-texture_filter = 3
-material = SubResource("ShaderMaterial_mpn87")
-scale = Vector2(3, 3)
-
-[node name="Character_Hitbox" parent="." index="2"]
+[node name="Character_Hitbox" parent="." index="1"]
 position = Vector2(0, 21)
 shape = SubResource("CapsuleShape2D_ny1lx")
 
-[node name="Sprite2D" parent="." index="3"]
+[node name="Sprite2D" parent="." index="2"]
 texture_filter = 1
 scale = Vector2(3, 3)
 texture = ExtResource("15_oxtuy")
@@ -85,41 +75,68 @@ hframes = 9
 vframes = 3
 frame = 18
 
-[node name="AnimationPlayer" parent="." index="4"]
+[node name="AnimationPlayer" parent="." index="3"]
 root_node = NodePath("../Sprite2D")
 libraries = {
 "": ExtResource("3_tau3u")
 }
 
-[node name="Hit_AudioPlayer" parent="." index="6"]
+[node name="Hit_AudioPlayer" parent="." index="5"]
 volume_db = -5.0
 
-[node name="AudioListener2D" type="AudioListener2D" parent="." index="7"]
+[node name="AudioListener2D" type="AudioListener2D" parent="." index="6"]
 current = true
 
-[node name="Camera2D" type="Camera2D" parent="." index="8"]
+[node name="Camera2D" type="Camera2D" parent="." index="7"]
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
 editor_draw_drag_margin = true
 script = ExtResource("19_ux7bf")
 noise = SubResource("FastNoiseLite_8qra6")
 
-[node name="Dash" parent="." index="9" instance=ExtResource("4_3r6yc")]
+[node name="GUI" type="CanvasLayer" parent="Camera2D" index="0"]
+
+[node name="Container" type="Control" parent="Camera2D/GUI" index="0"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthBar" type="ProgressBar" parent="Camera2D/GUI/Container" index="0"]
+layout_mode = 2
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -63.0
+offset_right = 256.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_bthml")
+theme_override_styles/fill = SubResource("StyleBoxFlat_rrho8")
+value = 50.0
+rounded = true
+
+[node name="Dash" parent="." index="8" instance=ExtResource("4_3r6yc")]
 dash_distance = 150
 sound_effects = Array[AudioStream]([ExtResource("18_0tbli")])
 
-[node name="Slash" parent="." index="10" instance=ExtResource("21_0xrws")]
+[node name="Slash" parent="." index="9" instance=ExtResource("21_0xrws")]
 attack_damage = 10
 cooldown = 0.05
 sound_effects = Array[AudioStream]([ExtResource("19_kvb2n")])
 
-[node name="Stab" parent="." index="11" instance=ExtResource("21_i5qo7")]
+[node name="Stab" parent="." index="10" instance=ExtResource("21_i5qo7")]
 attack_damage = 10
 can_queue = true
 cooldown = 0.5
 sound_effects = Array[AudioStream]([ExtResource("22_ww8fo")])
 
-[node name="PauseMenu" type="CanvasLayer" parent="." index="12"]
+[node name="PauseMenu" type="CanvasLayer" parent="." index="11"]
 process_mode = 2
 visible = false
 

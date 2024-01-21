@@ -6,6 +6,8 @@ var started_combat = true
 var is_waiting = false
 
 @onready var wait_timer = $WaitTimer
+@export var wait_min : float = 0.25
+@export var wait_max : float = 2.5
 
 @export var can_be_staggered = true
 @export var time_to_ignore_hits : float = 1.0
@@ -153,5 +155,5 @@ func change_action(new_action: int) -> bool:
     return result
 
 func start_wait_timer():
-    wait_timer.set_wait_time( clampf(rng.randf_range(1.0, 5.0), 1.0, 5.0) )
+    wait_timer.set_wait_time( clampf(rng.randf_range(wait_min, wait_max), wait_min, wait_max) )
     wait_timer.start()

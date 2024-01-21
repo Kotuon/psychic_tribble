@@ -4,6 +4,8 @@
 [ext_resource type="Script" path="res://enemies/actions/stomp_attack.gd" id="2_33li4"]
 [ext_resource type="Shader" path="res://enemies/actions/stomp_attack.gdshader" id="3_pajnh"]
 [ext_resource type="AudioStream" uid="uid://cevpjdoj7ccex" path="res://assets/audio/attack/Fantasy_Game_Magic_Earth_Spell_A.wav" id="3_r1h5c"]
+[ext_resource type="FastNoiseLite" uid="uid://bst42j220o6i2" path="res://enemies/actions/stomp_noise1.tres" id="4_m6s5i"]
+[ext_resource type="FastNoiseLite" uid="uid://7g2h340ws12a" path="res://enemies/actions/stomp_noise2.tres" id="5_w4pwn"]
 
 [sub_resource type="Gradient" id="Gradient_pmygg"]
 offsets = PackedFloat32Array(0, 0.1, 0.65, 1)
@@ -12,32 +14,19 @@ colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_kvi4o"]
 gradient = SubResource("Gradient_pmygg")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_w6oh8"]
-noise_type = 3
-seed = 4
-frequency = 0.1
-fractal_type = 2
-
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1x7ag"]
 seamless = true
-noise = SubResource("FastNoiseLite_w6oh8")
+noise = ExtResource("4_m6s5i")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ua24g"]
-noise_type = 3
-seed = 16
-frequency = 0.025
-fractal_type = 2
-fractal_octaves = 1
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4mlsv"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r52gi"]
 seamless = true
-noise = SubResource("FastNoiseLite_ua24g")
+noise = ExtResource("5_w4pwn")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e6mbb"]
 shader = ExtResource("3_pajnh")
-shader_parameter/scroll_1 = Vector2(0.05, 0.05)
-shader_parameter/scroll_2 = Vector2(-0.05, -0.05)
-shader_parameter/distortion_strength = 0.2
+shader_parameter/scroll_1 = Vector2(0, 0)
+shader_parameter/scroll_2 = Vector2(0, 0)
+shader_parameter/distortion_strength = 1.0
 shader_parameter/tint_color = Color(0.835294, 0.780392, 0.556863, 1)
 shader_parameter/top_color = Color(0.54902, 0.666667, 0.333333, 1)
 shader_parameter/light_start = 0.269
@@ -45,7 +34,7 @@ shader_parameter/light_end = 0.945
 shader_parameter/is_running = true
 shader_parameter/input_value = 0.5
 shader_parameter/noise_1 = SubResource("NoiseTexture2D_1x7ag")
-shader_parameter/noise_2 = SubResource("NoiseTexture2D_4mlsv")
+shader_parameter/noise_2 = SubResource("NoiseTexture2D_r52gi")
 shader_parameter/gradiant = SubResource("GradientTexture1D_kvi4o")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_03470"]
