@@ -23,6 +23,9 @@ var is_waiting = false
 @onready var navigation = $NavigationAgent2D
 var next_position : Vector2
 
+@onready var chase_timer = $ChaseTimer
+var health_bar
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     super._ready()
@@ -55,16 +58,7 @@ func _process(delta: float) -> void:
         var result = false
         if !is_waiting:
             if current_action == -1:
-                var rand_val = rng.randi_range(0, clap.chance + stomp.chance)
-            
-                if rand_val < clap.chance:
-                    result = change_action(clap.action_id)
-                    clap.chance = clampi(clap.chance - clap.chance_change, clap.chance_min, clap.chance_max)
-                    stomp.chance = clampi(stomp.chance + stomp.chance_change, stomp.chance_min, stomp.chance_max)
-                else:
-                    result = change_action(chase.action_id)
-                    stomp.chance = clampi(stomp.chance - stomp.chance_change, stomp.chance_min, stomp.chance_max)
-                    clap.chance = clampi(clap.chance + clap.chance_change, clap.chance_min, clap.chance_max)
+                result = random_attack()
 
         if distance_from_player <= 60 && current_action == chase.action_id:
             chase.end()
@@ -72,6 +66,22 @@ func _process(delta: float) -> void:
         if !result:
             if !animation_player.is_playing():
                 animation_player.play("idle")
+
+func random_attack() -> bool:
+    var result := false
+    var rand_val = rng.randi_range(0, clap.chance + stomp.chance)
+
+    if rand_val < clap.chance:
+        result = change_action(clap.action_id)
+        clap.chance = clampi(clap.chance - clap.chance_change, clap.chance_min, clap.chance_max)
+        stomp.chance = clampi(stomp.chance + stomp.chance_change, stomp.chance_min, stomp.chance_max)
+    else:
+        result = change_action(chase.action_id)
+        chase_timer.start()
+        stomp.chance = clampi(stomp.chance - stomp.chance_change, stomp.chance_min, stomp.chance_max)
+        clap.chance = clampi(clap.chance + clap.chance_change, clap.chance_min, clap.chance_max)
+
+    return result
 
 func walk(delta: float, direction: Vector2, play_sound: bool = true) -> void:
     if direction.length_squared() > 0.0:
@@ -123,10 +133,11 @@ func kill() -> void:
     animation_player.play("death")
 
 func take_damage(damage: int) -> void:
-    if !started_combat || !has_spawned:
+    if !started_combat || !has_spawned || has_died:
         return
 
     super.take_damage(damage)
+    health_bar.set_value(curr_health)
     if can_be_staggered:
         animation_player.play("hit")
         start_stagger_timer()
@@ -139,7 +150,8 @@ func _on_stagger_timer_timeout() -> void:
     can_be_staggered = true
 
 func freeze_movement():
-    can_walk = false
+    current_walk_speed = 0.0
+    #can_walk = false
 
 func unfreeze_movement():
     can_walk = true
@@ -157,3 +169,28 @@ func change_action(new_action: int) -> bool:
 func start_wait_timer():
     wait_timer.set_wait_time( clampf(rng.randf_range(wait_min, wait_max), wait_min, wait_max) )
     wait_timer.start()
+
+func play_footstep_sound() -> void:
+    if footstep_sounds.size() == 0:
+        return
+
+    var random_index = rng.randi_range(0,footstep_sounds.size() - 1)
+    footstep_audioplayer.stream = footstep_sounds[random_index]
+    footstep_audioplayer.play()
+
+
+func _on_chase_timer_timeout() -> void:
+    chase.end()
+    current_action = -1
+
+func display_health_bar() -> void:
+    health_bar = preload("res://menus/health_bar.tscn").instantiate()
+    player.get_node("Camera2D/GUI/Container").add_child(health_bar)
+    
+    health_bar.set_max(max_health)
+    health_bar.set_min(0)
+    health_bar.set_value(curr_health)
+    
+    #player.$Camera2D/GUI/Container.add_child(health_bar)
+    #parent.get_parent().add_child(new_projectile)
+

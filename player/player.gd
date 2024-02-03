@@ -3,25 +3,29 @@ class_name Player
 
 var most_recent_checkpoint : Node2D
 
-@onready var health_bar : ProgressBar = $Camera2D/GUI/Container/HealthBar
+#@onready var health_bar : ProgressBar = $Camera2D/GUI/Container/HealthBar
+
+@onready var health_ticks : Array[AnimatedSprite2D] = [ $Camera2D/GUI/Container/HFlowContainer/Tick_0, $Camera2D/GUI/Container/HFlowContainer/Tick_1, $Camera2D/GUI/Container/HFlowContainer/Tick_2 ]
 
 @onready var camera = $Camera2D
 
-@onready var dash = $Dash
-@onready var slash = $Slash
-@onready var stab = $Stab
+@onready var dash := $Dash
+@onready var slash := $Slash
+@onready var stab := $Stab
 
-@onready var pause_menu = $PauseMenu
+@onready var pause_menu := $PauseMenu
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
     super._ready()
 
-    health_bar.set_max(float(max_health))
-    health_bar.set_value(float(curr_health))
+    #health_bar.set_max(max_health)
+    #health_bar.set_value(curr_health)
 
     pause_menu.hide()
     animation_player.play("front_idle")
+    
+    Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -30,8 +34,6 @@ func _process(delta):
     walk(delta, direction)
 
 func _input(event: InputEvent):
-    if event.is_action_pressed("dash"):
-        change_action(dash.action_id)
 
     if event.is_action_pressed("slash"):
         if current_action == dash.action_id:
@@ -39,14 +41,15 @@ func _input(event: InputEvent):
         else:
             change_action(slash.action_id)
 
+    if event.is_action_pressed("dash"):
+        change_action(dash.action_id)
+
     if event.is_action_pressed("pause"):
         if !get_tree().paused:
+            Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
             get_tree().paused = true
             pause_menu.show()
             set_physics_process(false)
-
-    if event.is_action_pressed("shake_test"):
-        camera.add_trauma(1.0)
 
 func kill():
     super.kill()
@@ -64,14 +67,16 @@ func kill():
         
 
 func take_damage(damage: int) -> void:
+    var curr_health_cpy = curr_health
     super.take_damage(damage)
-    health_bar.set_value(float(curr_health))
+    if curr_health_cpy != curr_health:
+        health_ticks[curr_health].play("Hit")
 
 func _on_resume_pressed() -> void:
+    Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
     pause_menu.hide()
     get_tree().paused = false
     set_physics_process(true)
-
 
 func _on_quit_pressed() -> void:
     get_tree().quit()

@@ -17,7 +17,7 @@ func _ready() -> void:
     #add_child(tween)
     #tween.connect("loop_finished", self)
     tween.loop_finished.connect(loop_finished)
-    tween.tween_method(set_shader_value, 0.0, 1.0, 1)
+    tween.tween_method(set_shader_value, 0.0, 1.0, 1.0)
     tween.stop()
 
     stop_shader()
@@ -33,7 +33,7 @@ func start() -> bool:
     if (!super.start()):
         return false
 
-    attack_hitbox.disabled = false
+    attack_hitbox.set_disabled(false)
     hit_enemies.clear()
 
     parent.animation_player.play("stomp")
@@ -42,7 +42,8 @@ func start() -> bool:
 
 func end() -> void:
     super.end()
-    attack_hitbox.disabled = true
+
+    attack_hitbox.call_deferred("set_disabled", true)
     parent.start_wait_timer()
 
 func _on_attack_area_body_entered(_body: Node2D) -> void:

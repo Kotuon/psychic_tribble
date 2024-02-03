@@ -16,16 +16,18 @@ uniform float light_start : hint_range(0.0, 1.0) = 0.275;
 uniform float light_end : hint_range(0.0, 1.0) = 0.4;
 
 uniform sampler2D gradiant;
+uniform sampler2D flash_value;
 
 uniform bool is_running = false;
 uniform float input_value = 0.0;
 
 void fragment() {
     vec4 grad_color = texture(gradiant, vec2(input_value, 0.5));
+    vec4 flash_color = texture(flash_value, vec2(input_value, 0.5));
     if (is_running) {
         float depth = texture(noise_1, UV + scroll_1 * TIME).r * texture(noise_2, UV + scroll_2 * TIME).r;
         vec4 screen_col = texture(SCREEN_TEXTURE, SCREEN_UV + distortion_strength * vec2(depth)) * 0.8;
-        vec4 top_light = smoothstep(light_start, light_end, depth) * top_color * 0.6;
+        vec4 top_light = smoothstep(light_start, light_end, depth) * top_color * (flash_color.a * 2.0);
 
         COLOR = screen_col * tint_color + top_light;// * tint_color + top_light;
         ///COLOR.rgb += COLOR.rgb * (1.0 - input_value);

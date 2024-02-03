@@ -5,6 +5,8 @@ extends Projectile
 
 @onready var sprite = $Sprite2D
 
+var hit_enemies : Array[CharacterBody2D]
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     super._ready()
@@ -21,3 +23,4 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
     if body.name == "player":
         if body.can_take_damage:
             body.take_damage(damage)
+            hit_enemies.push_back(body)

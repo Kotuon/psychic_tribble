@@ -5,7 +5,7 @@ class_name CharacterBase
 @export var max_health : int = 3
 var curr_health : int
 var has_died = false
-var can_take_damage = true
+@export var can_take_damage = true
 var in_hazard = false
 
 # Movement
@@ -186,7 +186,7 @@ func kill() -> void:
     has_died = true
 
 func take_damage(damage: int) -> void:
-    if !can_take_damage:
+    if !can_take_damage || has_died:
         return
 
     curr_health -= damage
@@ -233,3 +233,7 @@ func stun(time_stunned: float):
     this_text.current_velocity = Vector2(0,-200)
     this_text.position = position - Vector2(0,50)
     this_text.get_node("Label").text = "Stunned"
+
+func set_can_take_damage(value: bool) -> void:
+    #print("Can take damage: " + str(value) + ".")
+    can_take_damage = value

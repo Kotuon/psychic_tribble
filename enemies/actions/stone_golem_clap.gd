@@ -30,7 +30,7 @@ func start() -> bool:
 
 func end() -> void:
     super.end()
-    attack_hitbox.disabled = true
+    attack_hitbox.call_deferred("set_disabled", true)
     parent.start_wait_timer()
 
 func spawn_projectile():

@@ -1,11 +1,15 @@
-[gd_scene load_steps=18 format=3 uid="uid://dnh1vy206kekx"]
+[gd_scene load_steps=22 format=3 uid="uid://dnh1vy206kekx"]
 
 [ext_resource type="PackedScene" uid="uid://ckp8pbos4m2tb" path="res://enemies/enemy.tscn" id="1_tpu2m"]
 [ext_resource type="Script" path="res://enemies/stone_golem.gd" id="2_0ycfc"]
 [ext_resource type="Texture2D" uid="uid://dasvwtpvnpbhh" path="res://assets/art/Stone_golem/Stone-golem v2-all animations-224x192.png" id="3_gg0sh"]
+[ext_resource type="AudioStream" uid="uid://darabtto2ajj0" path="res://assets/audio/footsteps/Fantasy_Game_Crafting_Material_Stone_Light_Hit_1.wav" id="3_ncoc2"]
+[ext_resource type="AudioStream" uid="uid://ddci5mopkckx0" path="res://assets/audio/footsteps/Fantasy_Game_Crafting_Material_Stone_Light_Hit_2.wav" id="4_agd76"]
 [ext_resource type="AudioStream" uid="uid://cbnu33mbh86o8" path="res://assets/audio/spawn/Fantasy_Game_Magic_Earth_Long_Cast_Spell_A.wav" id="4_n3dxx"]
 [ext_resource type="PackedScene" uid="uid://u5resou4a16m" path="res://enemies/actions/stone_golem_clap.tscn" id="5_6v2bx"]
+[ext_resource type="AudioStream" uid="uid://i3vsexypt5jk" path="res://assets/audio/footsteps/Fantasy_Game_Crafting_Material_Stone_Light_Hit_4.wav" id="5_we4ym"]
 [ext_resource type="PackedScene" uid="uid://dfa4x1vdn6ddq" path="res://enemies/actions/stomp_attack.tscn" id="6_4r3ok"]
+[ext_resource type="AudioStream" uid="uid://ddekvlug380et" path="res://assets/audio/footsteps/Fantasy_Game_Crafting_Material_Stone_Light_Hit_5.wav" id="6_eqq35"]
 [ext_resource type="PackedScene" uid="uid://dp5nl7vmwkymq" path="res://enemies/actions/chase.tscn" id="7_j2nfn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_06v5d"]
@@ -172,6 +176,20 @@ tracks/2/keys = {
 "method": &"shake_player_camera"
 }]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(2.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"display_health_bar"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_ae4b1"]
 resource_name = "stomp"
@@ -196,7 +214,7 @@ tracks/1/path = NodePath("Attack_Stomp")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.4, 0.55),
+"times": PackedFloat32Array(0.45, 0.55),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -296,6 +314,23 @@ tracks/2/keys = {
 "method": &"unfreeze_movement"
 }]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.15, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_footstep_sound"
+}, {
+"args": [],
+"method": &"play_footstep_sound"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6wywk"]
 _data = {
@@ -315,51 +350,59 @@ y_sort_enabled = true
 script = ExtResource("2_0ycfc")
 wait_min = 0.25
 wait_max = 2.5
-can_be_staggered = true
+can_be_staggered = false
 time_to_ignore_hits = 5.0
 has_spawned = true
 look_for_player = true
 max_health = 300
 max_walk_speed = 200
 can_run = false
+footstep_sounds = Array[AudioStream]([ExtResource("3_ncoc2"), ExtResource("4_agd76"), ExtResource("5_we4ym"), ExtResource("6_eqq35")])
 
-[node name="Character_Hitbox" parent="." index="0"]
+[node name="ChaseTimer" type="Timer" parent="." index="0"]
+wait_time = 3.0
+
+[node name="Character_Hitbox" parent="." index="1"]
 visible = false
 z_index = 3
 position = Vector2(0.5, -15)
 shape = SubResource("RectangleShape2D_06v5d")
 
-[node name="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" parent="." index="2"]
 y_sort_enabled = true
 scale = Vector2(3, 3)
 texture = ExtResource("3_gg0sh")
 hframes = 17
 vframes = 5
 
-[node name="AnimationPlayer" parent="." index="2"]
+[node name="AnimationPlayer" parent="." index="3"]
 libraries = {
 "": SubResource("AnimationLibrary_6wywk")
 }
 
-[node name="Spawn_AudioPlayer" type="AudioStreamPlayer2D" parent="." index="5"]
+[node name="Footstep_AudioPlayer" parent="." index="4"]
+pitch_scale = 0.5
+
+[node name="Spawn_AudioPlayer" type="AudioStreamPlayer2D" parent="." index="6"]
 stream = ExtResource("4_n3dxx")
 
-[node name="Attack_Clap" parent="." index="6" instance=ExtResource("5_6v2bx")]
+[node name="Attack_Clap" parent="." index="7" instance=ExtResource("5_6v2bx")]
 
-[node name="Attack_Stomp" parent="." index="7" instance=ExtResource("6_4r3ok")]
+[node name="Attack_Stomp" parent="." index="8" instance=ExtResource("6_4r3ok")]
 y_sort_enabled = true
 position = Vector2(0, -2)
 
-[node name="Chase" parent="." index="8" instance=ExtResource("7_j2nfn")]
+[node name="Chase" parent="." index="9" instance=ExtResource("7_j2nfn")]
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="9"]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="10"]
 debug_path_custom_color = Color(1, 0, 0, 1)
 debug_path_custom_point_size = 8.0
 
-[node name="StaggerTimer" type="Timer" parent="." index="10"]
+[node name="StaggerTimer" type="Timer" parent="." index="11"]
 
-[node name="WaitTimer" type="Timer" parent="." index="11"]
+[node name="WaitTimer" type="Timer" parent="." index="12"]
 wait_time = 2.0
 
+[connection signal="timeout" from="ChaseTimer" to="." method="_on_chase_timer_timeout"]
 [connection signal="timeout" from="StaggerTimer" to="." method="_on_stagger_timer_timeout"]
 [connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]

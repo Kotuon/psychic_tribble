@@ -60,5 +60,5 @@ func end() -> void:
     parent.can_walk = true
     attack_number = 0
     attack_hitbox.disabled = true
-    parent.current_walk_speed = 0
+    parent.current_walk_speed = parent.max_walk_speed / 2.0
     super.end()

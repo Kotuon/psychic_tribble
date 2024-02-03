@@ -39,7 +39,7 @@ func start() -> bool:
 
     parent.can_walk = false
     is_running = true
-    parent.can_take_damage = false
+    parent.set_can_take_damage(false)
     time_since_dash_started = 0.0
 
     parent.animation_player.play(parent.get_animation_direction(dash_direction) + "_dash")
@@ -52,7 +52,7 @@ func start() -> bool:
 func end() -> void:
     parent.can_walk = true
     is_running = false
-    parent.can_take_damage = true
+    parent.set_can_take_damage(true)
     parent.current_walk_speed = parent.current_walk_speed / 2.0
 
     if parent.in_hazard:

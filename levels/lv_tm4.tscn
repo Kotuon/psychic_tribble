@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dx7i2iirajj64"]
+[gd_scene load_steps=23 format=3 uid="uid://dx7i2iirajj64"]
 
 [ext_resource type="Texture2D" uid="uid://tp3lknyy0d0b" path="res://assets/art/Environment/Tilesets/Tileset-Terrain.png" id="1_mt1n4"]
 [ext_resource type="Texture2D" uid="uid://cd6igk18xbxt" path="res://assets/art/Environment/Props/Atlas-Props.png" id="2_0dn6k"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://d05jipos5envu" path="res://objects/portal.tscn" id="10_lg1lf"]
 [ext_resource type="PackedScene" uid="uid://ct42ti53jtdon" path="res://objects/checkpoint.tscn" id="11_islyn"]
 [ext_resource type="PackedScene" uid="uid://drd5gnki01kge" path="res://objects/wall.tscn" id="12_0p561"]
+[ext_resource type="Script" path="res://levels/AreaWalls.gd" id="13_234vq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8dm81"]
 texture = ExtResource("1_mt1n4")
@@ -36995,7 +36996,7 @@ vertices = PackedVector2Array(-125.333, -865.333, 122.667, -865.333, 176, -813.3
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-125.333, -865.333, 122.667, -865.333, 176, -813.333, 176, -658.667, 126.667, -608, -122.667, -609.333, -176, -658.667, -177.333, -813.333)])
 
-[node name="LV_tm2" type="Node2D"]
+[node name="LV_tm4" type="Node2D"]
 process_mode = 1
 y_sort_enabled = true
 
@@ -37042,7 +37043,6 @@ navigation_polygon = SubResource("NavigationPolygon_g4v5c")
 [node name="player" parent="TileMap" instance=ExtResource("8_ousu6")]
 position = Vector2(2.66667, -553.333)
 scale = Vector2(0.333333, 0.333333)
-max_health = 30000
 
 [node name="stone_golem" parent="TileMap" instance=ExtResource("9_nujei")]
 position = Vector2(0, -760)
@@ -37081,3 +37081,64 @@ scale = Vector2(433.667, 2.22846)
 z_index = 3
 position = Vector2(116, 1396)
 scale = Vector2(433.667, 2.22846)
+
+[node name="AreaWalls" type="Area2D" parent="."]
+visible = false
+script = ExtResource("13_234vq")
+
+[node name="wall" parent="AreaWalls" instance=ExtResource("12_0p561")]
+z_index = 3
+position = Vector2(-564, -2208)
+scale = Vector2(1, 23.56)
+collision_enabled = false
+
+[node name="wall2" parent="AreaWalls" instance=ExtResource("12_0p561")]
+z_index = 3
+position = Vector2(564, -2208)
+scale = Vector2(1, 23.56)
+collision_enabled = false
+
+[node name="wall3" parent="AreaWalls" instance=ExtResource("12_0p561")]
+z_index = 3
+position = Vector2(0, -2632)
+scale = Vector2(38.2, 1)
+collision_enabled = false
+
+[node name="wall4" parent="AreaWalls" instance=ExtResource("12_0p561")]
+z_index = 3
+position = Vector2(0, -1784)
+scale = Vector2(38.2, 1)
+collision_enabled = false
+
+[node name="wall5" parent="AreaWalls" instance=ExtResource("12_0p561")]
+z_index = 3
+position = Vector2(476, -1876)
+rotation = -0.785398
+scale = Vector2(14.1866, 1)
+collision_enabled = false
+
+[node name="wall6" parent="AreaWalls" instance=ExtResource("12_0p561")]
+z_index = 3
+position = Vector2(-476, -2540)
+rotation = -0.785398
+scale = Vector2(14.1866, 1)
+collision_enabled = false
+
+[node name="wall7" parent="AreaWalls" instance=ExtResource("12_0p561")]
+z_index = 3
+position = Vector2(472, -2536)
+rotation = 0.785398
+scale = Vector2(14.1866, 1)
+collision_enabled = false
+
+[node name="wall8" parent="AreaWalls" instance=ExtResource("12_0p561")]
+z_index = 3
+position = Vector2(-472, -1876)
+rotation = 0.785398
+scale = Vector2(14.1866, 1)
+collision_enabled = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AreaWalls"]
+polygon = PackedVector2Array(-376, -2596, 368, -2596, 528, -2440, 528, -1976, 380, -1824, -368, -1828, -528, -1976, -532, -2440)
+
+[connection signal="body_entered" from="AreaWalls" to="AreaWalls" method="_on_body_entered"]

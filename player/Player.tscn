@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dapv32tmbt4nj"]
+[gd_scene load_steps=39 format=3 uid="uid://dapv32tmbt4nj"]
 
 [ext_resource type="PackedScene" uid="uid://djicriy84rtem" path="res://character/character_base.tscn" id="1_t6k54"]
 [ext_resource type="Script" path="res://player/player.gd" id="2_yt7a2"]
@@ -19,6 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://dkp42xwrgacp6" path="res://assets/audio/ambient/Fantasy_World_Loop_Ambience_Crystal_Maze_Full_Swirling_Ancient_Movement_Motion_LFO_Modulation_Cm.wav" id="15_j2762"]
 [ext_resource type="Texture2D" uid="uid://dxof852yd2cmw" path="res://assets/art/Red_Sprite/BackSIde COnesecutiveSlash.png" id="15_oxtuy"]
 [ext_resource type="AudioStream" uid="uid://v2gjo7fbt75r" path="res://assets/audio/abilities/Fantasy_Game_Item_Collect_Magic_A.wav" id="18_0tbli"]
+[ext_resource type="Texture2D" uid="uid://p41rqwk8r37c" path="res://assets/art/UI/Silver SpriteSheet_1.png" id="19_gsact"]
 [ext_resource type="AudioStream" uid="uid://dxfn6qvpay3u5" path="res://assets/audio/attack/Fantasy_Game_Attack_Blade_Draw_1.wav" id="19_kvb2n"]
 [ext_resource type="Script" path="res://player/camera.gd" id="19_ux7bf"]
 [ext_resource type="PackedScene" uid="uid://c4fhr6pj63qo4" path="res://player/actions/slash_attack.tscn" id="21_0xrws"]
@@ -34,11 +35,63 @@ height = 32.0
 noise_type = 3
 seed = 4145
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bthml"]
-bg_color = Color(0.2, 0.2, 0.2, 0.239216)
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4ce3"]
+atlas = ExtResource("19_gsact")
+region = Rect2(0, 96, 33, 48)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rrho8"]
-bg_color = Color(0.65098, 0, 0, 1)
+[sub_resource type="AtlasTexture" id="AtlasTexture_68c2k"]
+atlas = ExtResource("19_gsact")
+region = Rect2(33, 96, 33, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5oxho"]
+atlas = ExtResource("19_gsact")
+region = Rect2(66, 96, 33, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wji8n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j4ce3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_68c2k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5oxho")
+}],
+"loop": false,
+"name": &"Hit",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_udpcn"]
+atlas = ExtResource("19_gsact")
+region = Rect2(0, 192, 33, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kciub"]
+atlas = ExtResource("19_gsact")
+region = Rect2(33, 192, 33, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l0414"]
+atlas = ExtResource("19_gsact")
+region = Rect2(66, 192, 33, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r5wiu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_udpcn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kciub")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l0414")
+}],
+"loop": false,
+"name": &"Hit",
+"speed": 5.0
+}]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jligh"]
 bg_color = Color(0.0941176, 0.0941176, 0.0941176, 1)
@@ -104,25 +157,42 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HealthBar" type="ProgressBar" parent="Camera2D/GUI/Container" index="0"]
-layout_mode = 2
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -256.0
-offset_top = -63.0
-offset_right = 256.0
-offset_bottom = -23.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/background = SubResource("StyleBoxFlat_bthml")
-theme_override_styles/fill = SubResource("StyleBoxFlat_rrho8")
-value = 50.0
-rounded = true
+[node name="HFlowContainer" type="HFlowContainer" parent="Camera2D/GUI/Container" index="0"]
+clip_contents = true
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 39.0
+offset_top = 398.0
+offset_right = 95.0
+offset_bottom = 418.0
+grow_vertical = 2
+scale = Vector2(5, 5)
+
+[node name="Tick_0" type="AnimatedSprite2D" parent="Camera2D/GUI/Container/HFlowContainer" index="0"]
+texture_filter = 3
+position = Vector2(11, 11)
+sprite_frames = SubResource("SpriteFrames_wji8n")
+animation = &"Hit"
+
+[node name="Tick_1" type="AnimatedSprite2D" parent="Camera2D/GUI/Container/HFlowContainer" index="1"]
+texture_filter = 3
+position = Vector2(31, 11)
+sprite_frames = SubResource("SpriteFrames_r5wiu")
+animation = &"Hit"
+
+[node name="Tick_2" type="AnimatedSprite2D" parent="Camera2D/GUI/Container/HFlowContainer" index="2"]
+texture_filter = 3
+position = Vector2(47, 11)
+sprite_frames = SubResource("SpriteFrames_r5wiu")
+animation = &"Hit"
 
 [node name="Dash" parent="." index="8" instance=ExtResource("4_3r6yc")]
 dash_distance = 150
+can_queue = true
+cooldown = 0.6
 sound_effects = Array[AudioStream]([ExtResource("18_0tbli")])
 
 [node name="Slash" parent="." index="9" instance=ExtResource("21_0xrws")]

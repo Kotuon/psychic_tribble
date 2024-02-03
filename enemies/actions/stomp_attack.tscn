@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dfa4x1vdn6ddq"]
+[gd_scene load_steps=17 format=3 uid="uid://dfa4x1vdn6ddq"]
 
 [ext_resource type="PackedScene" uid="uid://bboby1p53hu7k" path="res://character/states/attack_base.tscn" id="1_a4482"]
 [ext_resource type="Script" path="res://enemies/actions/stomp_attack.gd" id="2_33li4"]
@@ -6,6 +6,13 @@
 [ext_resource type="AudioStream" uid="uid://cevpjdoj7ccex" path="res://assets/audio/attack/Fantasy_Game_Magic_Earth_Spell_A.wav" id="3_r1h5c"]
 [ext_resource type="FastNoiseLite" uid="uid://bst42j220o6i2" path="res://enemies/actions/stomp_noise1.tres" id="4_m6s5i"]
 [ext_resource type="FastNoiseLite" uid="uid://7g2h340ws12a" path="res://enemies/actions/stomp_noise2.tres" id="5_w4pwn"]
+
+[sub_resource type="Gradient" id="Gradient_aouaw"]
+offsets = PackedFloat32Array(0, 0.1, 1)
+colors = PackedColorArray(0, 0, 0, 0.301961, 0.466667, 0.466667, 0.466667, 1, 1, 1, 1, 0.301961)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nfyex"]
+gradient = SubResource("Gradient_aouaw")
 
 [sub_resource type="Gradient" id="Gradient_pmygg"]
 offsets = PackedFloat32Array(0, 0.1, 0.65, 1)
@@ -36,6 +43,7 @@ shader_parameter/input_value = 0.5
 shader_parameter/noise_1 = SubResource("NoiseTexture2D_1x7ag")
 shader_parameter/noise_2 = SubResource("NoiseTexture2D_r52gi")
 shader_parameter/gradiant = SubResource("GradientTexture1D_kvi4o")
+shader_parameter/flash_value = SubResource("GradientTexture1D_nfyex")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_03470"]
 
