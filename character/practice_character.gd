@@ -7,7 +7,7 @@ func _process(delta: float) -> void:
     super._process(delta)
 
 func take_damage(damage: int) -> void:
-    health += damage
+    curr_health += damage
     super.take_damage(damage)
 
     animation_player.play("hit")

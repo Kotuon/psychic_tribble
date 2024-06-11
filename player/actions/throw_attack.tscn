@@ -5,4 +5,11 @@
 
 [node name="throw_attack" instance=ExtResource("1_y5234")]
 script = ExtResource("2_wqt0v")
+start_ran = false
 can_queue = true
+
+[node name="Target_Area" type="Area2D" parent="." index="3"]
+
+[node name="Target_Hitbox" type="CollisionPolygon2D" parent="Target_Area" index="0"]
+scale = Vector2(9, 9)
+polygon = PackedVector2Array(10, 5, 30, -90, -30, -90, -10, 5)

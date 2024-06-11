@@ -53,7 +53,7 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
     if body is CharacterBase && body != parent:
         hit_enemies.push_back(body)
         deal_damage(body)
-        
+
 func deal_damage(body: Node2D) -> void:
     body.take_damage(attack_damage)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://dapv32tmbt4nj"]
+[gd_scene load_steps=40 format=3 uid="uid://dapv32tmbt4nj"]
 
 [ext_resource type="PackedScene" uid="uid://djicriy84rtem" path="res://character/character_base.tscn" id="1_t6k54"]
 [ext_resource type="Script" path="res://player/player.gd" id="2_yt7a2"]
@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://bglbr6srh4n72" path="res://player/actions/stab_attack.tscn" id="21_i5qo7"]
 [ext_resource type="AudioStream" uid="uid://berdu6xfribhq" path="res://assets/audio/attack/Fantasy_Game_Attack_Skill_Knife_Throw_B.wav" id="22_ww8fo"]
 [ext_resource type="FontFile" uid="uid://cnv5trghp6um2" path="res://assets/fonts/OpenDyslexic-Regular.otf" id="26_2gaor"]
+[ext_resource type="PackedScene" uid="uid://bmcw41vymj7r2" path="res://player/actions/throw_attack.tscn" id="26_ohkx1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ny1lx"]
 radius = 15.0
@@ -104,7 +105,6 @@ z_index = 1
 y_sort_enabled = true
 floor_stop_on_slope = false
 script = ExtResource("2_yt7a2")
-turn_speed = 350
 footstep_sounds = Array[AudioStream]([ExtResource("3_733wa"), ExtResource("4_dpnyj"), ExtResource("5_0u6x3"), ExtResource("6_q2w77"), ExtResource("7_m34f0"), ExtResource("8_cd0xu"), ExtResource("9_a6xal"), ExtResource("10_n2w7u"), ExtResource("11_gkasv"), ExtResource("12_jv3vn")])
 hit_sounds = Array[AudioStream]([ExtResource("13_h4y4f"), ExtResource("14_8i635")])
 
@@ -123,7 +123,6 @@ shape = SubResource("CapsuleShape2D_ny1lx")
 texture_filter = 1
 scale = Vector2(3, 3)
 texture = ExtResource("15_oxtuy")
-flip_h = true
 hframes = 9
 vframes = 3
 frame = 18
@@ -206,7 +205,9 @@ can_queue = true
 cooldown = 0.5
 sound_effects = Array[AudioStream]([ExtResource("22_ww8fo")])
 
-[node name="PauseMenu" type="CanvasLayer" parent="." index="11"]
+[node name="Throw" parent="." index="11" instance=ExtResource("26_ohkx1")]
+
+[node name="PauseMenu" type="CanvasLayer" parent="." index="12"]
 process_mode = 2
 visible = false
 

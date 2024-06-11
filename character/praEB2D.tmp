@@ -1,0 +1,109 @@
+[gd_scene load_steps=14 format=3 uid="uid://qmsxk36uoc1d"]
+
+[ext_resource type="PackedScene" uid="uid://djicriy84rtem" path="res://character/character_base.tscn" id="1_t7ece"]
+[ext_resource type="Script" path="res://character/practice_character.gd" id="2_0jw8a"]
+[ext_resource type="AudioStream" uid="uid://dwne8kbqlkexj" path="res://assets/audio/hit/Fantasy_Game_Weapons_Wood Shield_1_Block_Defend_Buckler_Deflect.wav" id="2_7u0vk"]
+[ext_resource type="Texture2D" uid="uid://bxhdr4ntiq0ke" path="res://assets/art/Red_Sprite/New/Front Shield.png" id="2_o0h7r"]
+[ext_resource type="AudioStream" uid="uid://dfu2b4laikby" path="res://assets/audio/hit/Fantasy_Game_Weapons_Wood Shield_2_Block_Defend_Buckler_Deflect.wav" id="3_njl1j"]
+[ext_resource type="AudioStream" uid="uid://d4fnkkd3354wp" path="res://assets/audio/hit/Fantasy_Game_Weapons_Wood Shield_3_Block_Defend_Buckler_Deflect.wav" id="4_folyx"]
+[ext_resource type="AudioStream" uid="uid://3mkehjcpnwjl" path="res://assets/audio/hit/Fantasy_Game_Weapons_Wood Shield_4_Block_Defend_Buckler_Deflect.wav" id="5_yfvqk"]
+[ext_resource type="AudioStream" uid="uid://dxtm7w7olydyb" path="res://assets/audio/hit/Fantasy_Game_Weapons_Wood Shield_5_Block_Defend_Buckler_Deflect.wav" id="6_ro4ae"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_745kp"]
+radius = 14.0
+height = 60.0
+
+[sub_resource type="Animation" id="Animation_vckuv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_j3c1w"]
+resource_name = "hit"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [6, 7, 8]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end_hit"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_qlkf7"]
+resource_name = "idle"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5k65n"]
+_data = {
+"RESET": SubResource("Animation_vckuv"),
+"hit": SubResource("Animation_j3c1w"),
+"idle": SubResource("Animation_qlkf7")
+}
+
+[node name="practice_character" instance=ExtResource("1_t7ece")]
+script = ExtResource("2_0jw8a")
+hit_sounds = Array[AudioStream]([ExtResource("2_7u0vk"), ExtResource("3_njl1j"), ExtResource("4_folyx"), ExtResource("5_yfvqk"), ExtResource("6_ro4ae")])
+
+[node name="Character_Hitbox" parent="." index="0"]
+shape = SubResource("CapsuleShape2D_745kp")
+
+[node name="Sprite2D" parent="." index="1"]
+scale = Vector2(3, 3)
+texture = ExtResource("2_o0h7r")
+hframes = 3
+vframes = 3
+frame = 3
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_5k65n")
+}
+
+[node name="Footstep_AudioPlayer" parent="." index="3"]
+bus = &"SFX"
+
+[node name="Hit_AudioPlayer" parent="." index="4"]
+volume_db = -6.0
+bus = &"SFX"

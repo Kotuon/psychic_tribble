@@ -1,16 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://b3ilwo1psw26b"]
+[gd_scene load_steps=5 format=3 uid="uid://b3ilwo1psw26b"]
 
+[ext_resource type="Script" path="res://objects/projectiles/spear.gd" id="1_ka1jh"]
 [ext_resource type="Texture2D" uid="uid://chhtf0y5s4kmg" path="res://assets/art/Red_Sprite/New/Side Throw-1.png.png" id="1_utg3m"]
-[ext_resource type="Script" path="res://objects/projectiles/projectile.gd" id="2_fepi0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4kxey"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y7wiq"]
+size = Vector2(28, 12)
 
 [node name="spear" type="CharacterBody2D"]
-script = ExtResource("2_fepi0")
+scale = Vector2(3, 3)
+script = ExtResource("1_ka1jh")
+lifetime = 20.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4kxey")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1, 1)
 texture = ExtResource("1_utg3m")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 7.94729e-08)
 shape = SubResource("RectangleShape2D_y7wiq")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

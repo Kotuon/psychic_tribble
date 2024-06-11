@@ -9,16 +9,16 @@ var has_died = false
 var in_hazard = false
 
 # Movement
-@export var max_walk_speed = 350
-@export var walk_acceleration = 600
-@export var brake_speed = 1250
-@export var turn_speed = 1000000
-@export var run_cutoff = 200
-@export var can_run = true
+@export var max_walk_speed : float = 350
+@export var walk_acceleration : float = 600
+@export var brake_speed : float = 1250
+@export var turn_speed : float = 1000000
+@export var run_cutoff : float = 200
+@export var can_run : bool = true
 
 var last_non_zero_input = Vector2(0,1)
-var current_walk_speed = 0
-var can_walk = true
+var current_walk_speed : float = 0
+var can_walk : bool = true
 
 # Animations
 @onready var animation_player = $AnimationPlayer
@@ -33,7 +33,7 @@ var can_walk = true
 # Hit
 @export var total_flicker_time = 0.8
 var time_to_flicker : float
-var is_flickering = false
+var is_flickering : bool = false
 var flicker_counter = 0.0
 var flicker_amount = 4
 var times_flickered = 0

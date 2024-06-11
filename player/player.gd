@@ -12,6 +12,7 @@ var most_recent_checkpoint : Node2D
 @onready var dash := $Dash
 @onready var slash := $Slash
 @onready var stab := $Stab
+@onready var throw := $Throw
 
 @onready var pause_menu := $PauseMenu
 
@@ -43,6 +44,11 @@ func _input(event: InputEvent):
 
     if event.is_action_pressed("dash"):
         change_action(dash.action_id)
+
+    if event.is_action_pressed("throw"):
+        change_action(throw.action_id)
+    if current_action == throw.action_id && event.is_action_released("throw"):
+        throw.trigger_release()
 
     if event.is_action_pressed("pause"):
         if !get_tree().paused:
