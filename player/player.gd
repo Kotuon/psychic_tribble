@@ -25,7 +25,7 @@ func _ready():
     pause_menu.hide()
     animation_player.play("front_idle")
     
-    Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+    #Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -46,7 +46,7 @@ func _input(event: InputEvent):
 
     if event.is_action_pressed("pause"):
         if !get_tree().paused:
-            Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+            Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
             get_tree().paused = true
             pause_menu.show()
             set_physics_process(false)
@@ -57,14 +57,11 @@ func kill():
     current_walk_speed = 0.0
     play_hit_sound()
 
-    if most_recent_checkpoint:
-        print("Start at checkpoint.")
-        position = most_recent_checkpoint.position
-        curr_health = max_health
-    else:
-        print("No checkpoint.")
-        get_tree().reload_current_scene()
-        
+    get_tree().reload_current_scene()
+    #if most_recent_checkpoint:
+     #   position = most_recent_checkpoint.position
+    #    curr_health = max_health
+
 
 func take_damage(damage: int) -> void:
     var curr_health_cpy = curr_health

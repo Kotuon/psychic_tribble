@@ -37041,7 +37041,7 @@ layer_4/tile_data = PackedInt32Array(-1703959, 65549, 4, -589846, 13, 1, -190056
 navigation_polygon = SubResource("NavigationPolygon_g4v5c")
 
 [node name="player" parent="TileMap" instance=ExtResource("8_ousu6")]
-position = Vector2(2.66667, -553.333)
+position = Vector2(2.66667, 240)
 scale = Vector2(0.333333, 0.333333)
 
 [node name="stone_golem" parent="TileMap" instance=ExtResource("9_nujei")]
