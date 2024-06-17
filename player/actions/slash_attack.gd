@@ -40,7 +40,7 @@ func start() -> bool:
 func end() -> void:
     if attack_number == 0 && is_combo:
         attack_number += 1
-        attack_damage = original_damage * 2
+        attack_damage = original_damage
 
         hit_enemies.clear()
         check_overlapping()

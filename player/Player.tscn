@@ -189,7 +189,8 @@ sprite_frames = SubResource("SpriteFrames_r5wiu")
 animation = &"Hit"
 
 [node name="Dash" parent="." index="8" instance=ExtResource("4_3r6yc")]
-dash_distance = 150
+time_to_dash = 0.1
+time_between_trail = 0.005
 can_queue = true
 cooldown = 0.6
 sound_effects = Array[AudioStream]([ExtResource("18_0tbli")])
@@ -206,6 +207,7 @@ cooldown = 0.5
 sound_effects = Array[AudioStream]([ExtResource("22_ww8fo")])
 
 [node name="Throw" parent="." index="11" instance=ExtResource("26_ohkx1")]
+cooldown = 0.25
 
 [node name="PauseMenu" type="CanvasLayer" parent="." index="12"]
 process_mode = 2

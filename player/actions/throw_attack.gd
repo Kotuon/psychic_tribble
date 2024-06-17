@@ -35,7 +35,7 @@ func start() -> bool:
 
     var direction = parent.get_animation_direction(parent.last_non_zero_input)
 
-    parent.animation_player.play(direction + "_throw_start", -1, 2.0)
+    parent.animation_player.play(direction + "_throw_start", -1, 3.0)
     play_sound(0.0)
 
     return true

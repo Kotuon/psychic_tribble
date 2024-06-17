@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b1b775yxg0px" path="res://assets/art/Environment/Props/rocks_sheet.png" id="5_w3rra"]
 [ext_resource type="Texture2D" uid="uid://bv41dcl87xlf3" path="res://assets/art/Environment/Props/trees_sheet.png" id="6_agpmo"]
 [ext_resource type="Texture2D" uid="uid://c61o5pktuscrb" path="res://assets/art/Environment/Props/vegetations_sheet.png" id="7_bgb4f"]
-[ext_resource type="PackedScene" uid="uid://dapv32tmbt4nj" path="res://player/player.tscn" id="8_ousu6"]
+[ext_resource type="PackedScene" uid="uid://dapv32tmbt4nj" path="res://player/Player.tscn" id="8_ousu6"]
 [ext_resource type="PackedScene" uid="uid://dnh1vy206kekx" path="res://enemies/stone_golem.tscn" id="9_nujei"]
 [ext_resource type="PackedScene" uid="uid://d05jipos5envu" path="res://objects/portal.tscn" id="10_lg1lf"]
 [ext_resource type="PackedScene" uid="uid://ct42ti53jtdon" path="res://objects/checkpoint.tscn" id="11_islyn"]

@@ -53,4 +53,4 @@ func stop_movement() -> void:
 
 func deal_damage(body: Node2D) -> void:
     super.deal_damage(body)
-    body.stun(0.0)
+    #body.stun(0.0)

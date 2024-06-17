@@ -5,4 +5,5 @@
 [node name="Dash_Trail" type="Sprite2D"]
 z_index = 1
 y_sort_enabled = true
+scale = Vector2(3, 3)
 script = ExtResource("1_4ofqf")

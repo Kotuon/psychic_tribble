@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://chhtf0y5s4kmg" path="res://assets/art/Red_Sprite/New/Side Throw-1.png.png" id="1_utg3m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4kxey"]
+size = Vector2(27.6667, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y7wiq"]
 size = Vector2(28, 12)
@@ -14,6 +15,7 @@ script = ExtResource("1_ka1jh")
 lifetime = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.166667, 0)
 shape = SubResource("RectangleShape2D_4kxey")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
